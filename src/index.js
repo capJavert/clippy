@@ -1,49 +1,59 @@
 
+var browser = window.browser = (function () {
+    return window.msBrowser ||
+        window.browser ||
+        window.chrome;
+})();
 var clippyHTML = '<div id="clippy-assistant-talk-bubble" class="clippy-assistant-talk-bubble"> <span id="clippy-assistant-comment-text"></span> <div class="clippy-assistant-talk-bubble-border"></div></div><figure class="clippy-assistant-clippy"></figure>';
 var clippy = {
+    isActive: true,
     width: 150,
     height: 139,
     comments: {
-        'facebook.com': 'It looks like you are spending too much time at this Face page...<br> Maybe take a break?',
-        'google.com': 'Maybe try bing? wink wink...',
-        'stackoverflow.com': 'Need help? <br><br> You could have just asked me...',
-        'reddit.com': 'I think this guys need a serious redesign!!',
-        'localhost': 'It works! Good job!'
+        'facebook': 'It looks like you are spending too much time at this Face page...<br><br> Maybe take a break?',
+        'google': 'Maybe try bing? wink wink...',
+        'stackoverflow': 'Need help? <br><br> You could have just asked me...',
+        'reddit': 'I think these guys need a serious redesign!!',
+        'localhost': 'It works! Good job!',
+        'twitter': 'Tweets&nbsp;can&nbsp;only&nbsp;be 280&nbsp;characters&nbsp;long!'
     },
     init: function() {
         var link = document.createElement('link');
-        link.href = '/assets/css/clippy.css'
+        link.href = browser.runtime.getURL('src/assets/css/clippy.css');
         link.type = 'text/css';
         link.rel = 'stylesheet';
         link.media = 'screen';
         document.head.appendChild(link);
 
-        this.clippyContainer = document.createElement('div');
-        this.clippyContainer.className = 'clippy-assistant-container';
-        this.clippyContainer.innerHTML = clippyHTML;
-        document.body.appendChild(this.clippyContainer);
-
-        console.log("Clippy loaded");
+        this.element = document.createElement('div');
+        this.element.className = 'clippy-assistant-container';
+        this.element.innerHTML = clippyHTML;
+        document.body.appendChild(this.element);
     },
     talk: function () {
         var talkBubble = document.getElementById('clippy-assistant-talk-bubble');
         var talkTextContainer = document.getElementById('clippy-assistant-comment-text');
-        talkTextContainer.innerText = '';
+        talkTextContainer.innerHTML = '';
 
         var hostname = window.location.hostname;
-        hostname = hostname.replace('www.', '');
+        var clippyComment = null;
 
-        if (this.comments[hostname] !== null) {
-            talkTextContainer.innerText = this.comments[hostname];
+        for (var property in this.comments) {
+            if (this.comments.hasOwnProperty(property)) {
+                if (hostname.indexOf(property) !== -1) {
+                    clippyComment = this.comments[property];
+                    break;
+                }
+            }
+        }
+
+        if (clippyComment !== null) {
+            talkTextContainer.innerHTML = clippyComment
             talkBubble.style.display = 'block';
 
             talkBubble.style.bottom = this.bubbleBottomOffset(talkBubble.innerHeight) + "px"
-
-            console.log("Clippy talked", this.comments[hostname]);
         } else {
             talkBubble.style.display = 'none';
-
-            console.log("Clippy did not talk");
         }
     },
     bubbleBottomOffset: function (bubbleHeight) {
@@ -55,3 +65,13 @@ window.addEventListener('load', function () {
     clippy.init();
     clippy.talk();
 }, false)
+
+browser.runtime.onMessage.addListener(function(request) {
+    switch (request.name) {
+        case 'isActive':
+            clippy.element.style.display = request.value ? 'block' : 'none';
+            break
+        default:
+            return
+    }
+});

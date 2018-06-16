@@ -15,8 +15,7 @@
       "19":"favicon-16x16.png",
       "20":"favicon-16x16.png",
       "38":"favicon.ico"
-    },
-    "default_popup": "dashboard.html"
+    }
   },
   "content_scripts": [
     {
@@ -25,7 +24,16 @@
       "run_at": "document_end"
     }
   ],
-  "web_accessible_resources": ["assets/*"],
+  "background": {
+    "scripts": [
+      "src/assets/js/state.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "src/assets/css/clippy.css",
+    "src/assets/img/clippy.png"
+  ],
   "permissions": [
     "activeTab"
   ]
