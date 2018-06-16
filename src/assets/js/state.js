@@ -1,11 +1,37 @@
 
-var browser = window.browser = (function () {
+var browser = (function () {
     return window.msBrowser ||
-        window.browser ||
-        window.chrome;
+        browser ||
+        chrome;
 })();
 var settings = {
-    isActive: true
+    isActive: true,
+    comments: {}
+}
+
+var commentsRepoURL = 'https://gist.githubusercontent.com/capJavert/2e80f4da21e4e9664f7dc04642d5fc15/raw/dee82497c1ab32c6008fdba831411db253c58598/clippy.json'
+var loadComments = function () {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open('GET', commentsRepoURL, true);
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+           settings.comments = JSON.parse(xhttp.response);
+
+            browser.tabs.query({}, function(tabs) {
+                for (var index in tabs) {
+                    browser.tabs.sendMessage(
+                        tabs[index].id,
+                        {
+                            name: 'comments',
+                            value: settings.comments
+                        }
+                    );
+                }
+            });
+        }
+    };
+    xhttp.send();
 }
 
 browser.browserAction.onClicked.addListener(function() {
@@ -42,8 +68,11 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
                     name: 'isActive',
                     value: settings.isActive
                 }
-            )
-            break
+            );
+            break;
+        case 'comments':
+            loadComments();
+            break;
     }
 
     return true;
