@@ -1,10 +1,10 @@
 
-var browser = window.browser = (function () {
+var browser = (function () {
     return window.msBrowser ||
-        window.browser ||
-        window.chrome;
+        browser ||
+        chrome;
 })();
-var clippyHTML = '<div id="clippy-assistant-talk-bubble" class="clippy-assistant-talk-bubble"> <span id="clippy-assistant-comment-text"></span> <div class="clippy-assistant-talk-bubble-border"></div></div><figure class="clippy-assistant-clippy"></figure>';
+var clippyHTML = '<div id="clippy-assistant-talk-bubble" class="clippy-assistant-talk-bubble"> <span id="clippy-assistant-comment-text"></span> <div class="clippy-assistant-talk-bubble-border"></div></div><figure class="clippy-assistant-clippy"><img src="' + browser.extension.getURL('src/assets/img/clippy.png') + '" alt="Clippy"></figure>';
 var clippy = {
     width: 150,
     height: 139,
@@ -17,10 +17,7 @@ var clippy = {
         'twitter': 'Tweets&nbsp;can&nbsp;only&nbsp;be 280&nbsp;characters&nbsp;long!'
     },
     init: function() {
-        this.element = document.createElement('div');
-        this.element.className = 'clippy-assistant-container';
-        this.element.innerHTML = clippyHTML;
-        document.body.appendChild(this.element);
+        this.createElement();
     },
     talk: function () {
         var talkBubble = document.getElementById('clippy-assistant-talk-bubble');
@@ -52,7 +49,17 @@ var clippy = {
         return this.height + 50 + bubbleHeight
     },
     toggle: function (state) {
-        clippy.element.style.display = state ? 'block' : 'none';
+        this.element.style.display = state ? 'block' : 'none';
+    },
+    createElement: function () {
+        if (document.getElementsByClassName('clippy-assistant-container').length > 0) {
+            return;
+        }
+
+        this.element = document.createElement('div');
+        this.element.className = 'clippy-assistant-container';
+        this.element.innerHTML = clippyHTML;
+        document.body.appendChild(this.element);
     }
 };
 
@@ -69,7 +76,7 @@ window.addEventListener('load', function () {
 browser.runtime.onMessage.addListener(function(request) {
     switch (request.name) {
         case 'isActive':
-            clippy.element.style.display = request.value ? 'block' : 'none';
+            clippy.toggle(request.value)
             break;
     }
 });

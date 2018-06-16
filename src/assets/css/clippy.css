@@ -8,8 +8,10 @@
 .clippy-assistant-clippy {
     width: 150px;
     height: 139px;
-    background: url("chrome-extension://__MSG_@@extension_id__/src/assets/img/clippy.png") no-repeat;
-    background-size: 150px 139px;
+}
+
+.clippy-assistant-clippy img {
+    width: 100%;
 }
 
 .clippy-assistant-talk-bubble {
