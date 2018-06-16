@@ -1,0 +1,19 @@
+{
+  "name": "clippy-office-word-assistant",
+  "version": "1.0.0",
+  "description": "Clippy MS Word Office asistant is now back to help inside your browser!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capJavert/clippy-office-word-assistant.git"
+  },
+  "author": "Ante Barić (capJavert)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/capJavert/clippy-office-word-assistant/issues"
+  },
+  "homepage": "https://github.com/capJavert/clippy-office-word-assistant#readme"
+}
