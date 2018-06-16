@@ -1,0 +1,60 @@
+.clippy-assistant-container {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 2147483640;
+}
+
+.clippy-assistant-clippy {
+    width: 150px;
+    height: 139px;
+    background: url("../img/clippy-300x278.png") no-repeat;
+    background-size: 150px 139px;
+}
+
+.clippy-assistant-talk-bubble {
+    display: none;
+    max-width: 450px;
+    background: #fffcad;
+    color: #000000;
+    font-family: Tahoma, sans-serif;
+    border-radius: 15px;
+    border: 2px solid #000000;
+    padding: 20px 10px;
+    position: absolute;
+    bottom: 189px;
+    right: 20px;
+    z-index: 2147483641;
+}
+
+.clippy-assistant-talk-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 30px;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: #fffcad;
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -10px;
+    margin-bottom: -20px;
+    z-index: 2147483642;
+}
+
+.clippy-assistant-talk-bubble-border:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 29px;
+    width: 0;
+    height: 0;
+    border: 23px solid transparent;
+    border-top-color: #000000;
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -12px;
+    margin-bottom: -24px;
+    z-index: 2147483641;
+}
