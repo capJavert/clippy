@@ -20,6 +20,16 @@ browser.browserAction.onClicked.addListener(function() {
                     value: settings.isActive
                 }
             );
+
+            var iconName = 'src/assets/img/clippy-icon' + (settings.isActive ? '' : '-gray');
+            browser.browserAction.setIcon({
+                path: {
+                    16: iconName + '-48x48.png',
+                    24: iconName + '-48x48.png',
+                    32: iconName + '-48x48.png'
+                },
+                tabId: tabs[index].id
+            });
         }
     });
 });

@@ -5,16 +5,17 @@
   "description": "Clippy MS Word Office assistant is now back to assist inside your browser!",
   "version": "1.0",
   "author": "Ante Barić (capJavert)",
-
   "icons": {
-    "48": "favicon.ico"
+    "16": "src/assets/img/clippy-icon-16x16.png",
+    "48": "src/assets/img/clippy-icon-48x48.png",
+    "128": "src/assets/img/clippy-icon-128x128.png"
   },
   "browser_action": {
     "default_title": "Clippy Assistant",
     "default_icon": {
-      "19":"favicon-16x16.png",
-      "20":"favicon-16x16.png",
-      "38":"favicon.ico"
+      "16": "src/assets/img/clippy-icon-48x48.png",
+      "24": "src/assets/img/clippy-icon-48x48.png",
+      "32": "src/assets/img/clippy-icon-48x48.png"
     }
   },
   "content_scripts": [
