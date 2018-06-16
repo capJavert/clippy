@@ -17,13 +17,6 @@ var clippy = {
         'twitter': 'Tweets&nbsp;can&nbsp;only&nbsp;be 280&nbsp;characters&nbsp;long!'
     },
     init: function() {
-        var link = document.createElement('link');
-        link.href = browser.runtime.getURL('src/assets/css/clippy.css');
-        link.type = 'text/css';
-        link.rel = 'stylesheet';
-        link.media = 'screen';
-        document.head.appendChild(link);
-
         this.element = document.createElement('div');
         this.element.className = 'clippy-assistant-container';
         this.element.innerHTML = clippyHTML;

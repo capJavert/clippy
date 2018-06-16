@@ -20,7 +20,12 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["src/index.js"],
+      "js": [
+        "src/index.js"
+      ],
+      "css": [
+        "src/assets/css/clippy.css"
+      ],
       "run_at": "document_end"
     }
   ],
@@ -31,7 +36,6 @@
     "persistent": true
   },
   "web_accessible_resources": [
-    "src/assets/css/clippy.css",
     "src/assets/img/clippy.png"
   ],
   "permissions": [
