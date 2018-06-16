@@ -16,7 +16,7 @@ browser.browserAction.onClicked.addListener(function() {
             browser.tabs.sendMessage(
                 tabs[index].id,
                 {
-                    name: "isActive",
+                    name: 'isActive',
                     value: settings.isActive
                 }
             );
@@ -39,7 +39,7 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         case 'isActive':
             sendResponse(
                 {
-                    name: "isActive",
+                    name: 'isActive',
                     value: settings.isActive
                 }
             )

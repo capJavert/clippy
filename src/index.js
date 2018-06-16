@@ -40,7 +40,7 @@ var clippy = {
             talkTextContainer.innerHTML = clippyComment
             talkBubble.style.display = 'block';
 
-            talkBubble.style.bottom = this.bubbleBottomOffset(talkBubble.innerHeight) + "px"
+            talkBubble.style.bottom = this.bubbleBottomOffset(talkBubble.innerHeight) + 'px'
         } else {
             talkBubble.style.display = 'none';
         }
@@ -66,7 +66,7 @@ var clippy = {
 window.addEventListener('load', function () {
     clippy.init();
 
-    chrome.runtime.sendMessage({name: "isActive"}, function(response) {
+    chrome.runtime.sendMessage({name: 'isActive'}, function(response) {
         clippy.toggle(response.value);
     });
 
