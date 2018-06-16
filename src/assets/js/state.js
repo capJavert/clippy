@@ -23,3 +23,18 @@ browser.browserAction.onClicked.addListener(function() {
         }
     });
 });
+
+browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    switch (request.name) {
+        case 'isActive':
+            sendResponse(
+                {
+                    name: "isActive",
+                    value: settings.isActive
+                }
+            )
+            break
+    }
+
+    return true;
+});

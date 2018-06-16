@@ -6,7 +6,6 @@ var browser = window.browser = (function () {
 })();
 var clippyHTML = '<div id="clippy-assistant-talk-bubble" class="clippy-assistant-talk-bubble"> <span id="clippy-assistant-comment-text"></span> <div class="clippy-assistant-talk-bubble-border"></div></div><figure class="clippy-assistant-clippy"></figure>';
 var clippy = {
-    isActive: true,
     width: 150,
     height: 139,
     comments: {
@@ -58,11 +57,19 @@ var clippy = {
     },
     bubbleBottomOffset: function (bubbleHeight) {
         return this.height + 50 + bubbleHeight
+    },
+    toggle: function (state) {
+        clippy.element.style.display = state ? 'block' : 'none';
     }
 };
 
 window.addEventListener('load', function () {
     clippy.init();
+
+    chrome.runtime.sendMessage({name: "isActive"}, function(response) {
+        clippy.toggle(response.value);
+    });
+
     clippy.talk();
 }, false)
 
@@ -70,8 +77,6 @@ browser.runtime.onMessage.addListener(function(request) {
     switch (request.name) {
         case 'isActive':
             clippy.element.style.display = request.value ? 'block' : 'none';
-            break
-        default:
-            return
+            break;
     }
 });
