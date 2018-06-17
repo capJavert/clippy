@@ -33,3 +33,6 @@ Clippy fetches comments from public GIST file https://gist.github.com/capJavert/
 - If there are multiple comments for the same site Clippy will pick a random one
 - For moderation purposes new comments will be added in each new Clippy extension version
 - Feel free to build and install your own version of Clippy if you don't want to wait for next update
+
+### Credits
+- Smore Inc. (https://github.com/smore-inc/clippy.js) - JS recreation of classic MS Word assistant
