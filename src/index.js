@@ -13,6 +13,13 @@ var clippyController = {
     init: function(agent) {
         this.agent = agent
         this.fetchCommentUpdates();
+
+        browser.runtime.sendMessage({name: 'isActive'}, function(response) {
+            if (response.value) {
+                clippyController.toggle(response.value);
+                clippyController.idle();
+            }
+        });
     },
     talk: function () {
         var hostname = window.location.hostname;
@@ -46,7 +53,7 @@ var clippyController = {
                 this.lastComment = null;
             }
         } else {
-            this.agent.stopCurrent();
+            this.agent.stop();
         }
     },
     toggle: function (state) {
@@ -72,21 +79,14 @@ var clippyController = {
     idle: function () {
         browser.runtime.sendMessage({name: 'idle'});
     },
-    animate: function () {
-        this.agent.play(this.animations[Math.floor(Math.random()*this.animations.length)])
+    animate: function (callback) {
+        this.agent.play(this.animations[Math.floor(Math.random()*this.animations.length)], 5000, callback)
     }
 };
 
 window.addEventListener('load', function () {
     clippy.load('Clippy', function(agent){
         clippyController.init(agent);
-
-        browser.runtime.sendMessage({name: 'isActive'}, function(response) {
-            if (response.value) {
-                clippyController.toggle(response.value);
-                clippyController.idle();
-            }
-        });
     });
 }, false)
 
@@ -111,9 +111,11 @@ browser.runtime.onMessage.addListener(function(request) {
         case 'animate':
             browser.runtime.sendMessage({name: 'isActive'}, function(response) {
                 if (response.value) {
-                    clippyController.animate();
+                    clippyController.agent.stop();
                     clippyController.talk();
-                    browser.runtime.sendMessage({name: 'idle'});
+                    clippyController.animate(function () {
+                        browser.runtime.sendMessage({name: 'idle'});
+                    });
                 }
             });
             break;

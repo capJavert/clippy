@@ -46,19 +46,22 @@ var toggleIcon = function (tab) {
     });
 }
 
+var sendActive = function (tab) {
+    browser.tabs.sendMessage(
+        tab.id,
+        {
+            name: 'isActive',
+            value: settings.isActive
+        }
+    );
+}
+
 browser.browserAction.onClicked.addListener(function() {
     settings.isActive = !settings.isActive;
 
     browser.tabs.query({}, function(tabs) {
         for (var index in tabs) {
-            browser.tabs.sendMessage(
-                tabs[index].id,
-                {
-                    name: 'isActive',
-                    value: settings.isActive
-                }
-            );
-
+            sendActive(tabs[index]);
             toggleIcon(tabs[index]);
         }
     });
@@ -68,7 +71,9 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     switch (request.name) {
         case 'isActive':
             browser.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                toggleIcon(tabs[0]);
+                if (tabs.length > 0) {
+                    toggleIcon(tabs[0]);
+                }
             });
 
             sendResponse(
@@ -85,13 +90,15 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             if (settings.isActive) {
                 setTimeout(function(){
                     browser.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                        browser.tabs.sendMessage(
-                            tabs[0].id,
-                            {
-                                name: 'animate',
-                                value: true
-                            }
-                        );
+                        if (tabs.length > 0) {
+                            browser.tabs.sendMessage(
+                                tabs[0].id,
+                                {
+                                    name: 'animate',
+                                    value: true
+                                }
+                            );
+                        }
                     });
                 }, idleTime);
             }
