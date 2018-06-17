@@ -11,7 +11,7 @@ Clippy MS Word Office asistant is now back to assist inside your browser!
 ## The code
 You can pack this code into your custom extension for any major browser. These browsers are officially supported:
 - Chrome
-- Firefox (53+)
+- Firefox (57+)
 - Opera
 
 Consult these links for guids on how to develop, test and pack extensions:
@@ -27,7 +27,7 @@ $ npm install
 ```
 
 ### Contribute
-Clippy fetches comments from my personal repository file: https://github.com/capJavert/capJavert.github.io/blob/master/clippy/clippy.json - Feel free to contribute new comments for your favorite sites by making a pull request
+Clippy fetches comments from my personal repository file: https://github.com/capJavert/clippy-dictionary/blob/master/clippy.json - Feel free to contribute new comments for your favorite sites by making a pull request
 - Entries are filled in format ```"keyword": "comment"```
 - For example sitename for github.com would be 'github', but it could also be "com" which would add this comment for all sites containing ".com" in URL
 - You can also define an array of comments like ```"keyword: ["comment1", "comment2"]```
