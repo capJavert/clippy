@@ -25,8 +25,6 @@
         "src/assets/js/jquery.min.js",
         "src/assets/js/clippy.js",
         "src/assets/js/agent.js",
-        "src/assets/js/sounds-mp3.js",
-        "src/assets/js/sounds-ogg.js",
         "src/index.js"
       ],
       "css": [
@@ -42,7 +40,6 @@
     "persistent": true
   },
   "web_accessible_resources": [
-    "src/assets/img/clippy.png",
     "src/assets/img/clippy.map.png"
   ],
   "permissions": [

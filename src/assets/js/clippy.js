@@ -903,7 +903,7 @@ clippy.load._loadSounds = function (name, path) {
     // set dfd if not defined
     dfd = clippy.load._sounds[name] = $.Deferred();
 
-    var audio = document.createElement('audio');
+    /*var audio = document.createElement('audio');
     var canPlayMp3 = !!audio.canPlayType && "" != audio.canPlayType('audio/mpeg');
     var canPlayOgg = !!audio.canPlayType && "" != audio.canPlayType('audio/ogg; codecs="vorbis"');
 
@@ -913,7 +913,9 @@ clippy.load._loadSounds = function (name, path) {
         var src = browser.extension.getURL('src/assets/js' + (canPlayMp3 ? '/sounds-mp3.js' : '/sounds-ogg.js'));
         // load
         clippy.load._loadScript(src);
-    }
+    }*/
+
+    dfd.resolve({});
 
     return dfd.promise()
 };
