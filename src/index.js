@@ -8,10 +8,13 @@ var browser = (function () {
 var clippyController = {
     agent: null,
     lastComment: null,
+    animations: ['Congratulate', 'LookRight', 'SendMail', 'Thinking', 'Explain', 'IdleRopePile', 'IdleAtom', 'Print', 'GetAttention', 'Save', 'GetTechy', 'GestureUp', 'Idle1_1', 'Processing', 'Alert', 'LookUpRight', 'IdleSideToSide', 'LookLeft', 'IdleHeadScratch', 'LookUpLeft', 'CheckingSomething', 'Hearing_1', 'GetWizardy', 'IdleFingerTap', 'GestureLeft', 'Wave', 'GestureRight', 'Writing', 'IdleSnooze', 'LookDownRight', 'GetArtsy', 'LookDown', 'Searching', 'EmptyTrash', 'LookUp', 'GestureDown', 'RestPose', 'IdleEyeBrowRaise', 'LookDownLeft'],
     comments: {},
     init: function(agent) {
         this.agent = agent
         this.fetchCommentUpdates();
+
+        console.log(this.agent.animations());
     },
     talk: function () {
         var hostname = window.location.hostname;
@@ -40,11 +43,22 @@ var clippyController = {
         }
     },
     toggle: function (state) {
-        state ? this.agent.show(true) : this.agent.hide(true);
         var clippyBalloon = document.getElementsByClassName('clippy-balloon');
 
         if (clippyBalloon.length > 0) {
             clippyBalloon[0].style.display = state ? 'block' : 'none';
+        }
+
+        this.agent.stop();
+
+        if (!state) {
+            this.agent.play('GoodBye', 5000, function () {
+                clippyController.agent.hide(true)
+            });
+        } else {
+            this.agent.play('Show', 5000, function () {
+                clippyController.agent.show(true);
+            });
         }
     },
     fetchCommentUpdates: function () {
@@ -52,6 +66,9 @@ var clippyController = {
     },
     idle: function () {
         browser.runtime.sendMessage({name: 'idle'});
+    },
+    animate: function () {
+        this.agent.play(this.animations[Math.floor(Math.random()*this.animations.length)])
     }
 };
 
@@ -88,7 +105,7 @@ browser.runtime.onMessage.addListener(function(request) {
             });
             break;
         case 'animate':
-            clippyController.agent.animate();
+            clippyController.animate();
             clippyController.talk();
             browser.runtime.sendMessage({name: 'idle'});
             break;
