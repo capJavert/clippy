@@ -4,80 +4,93 @@ var browser = (function () {
         browser ||
         chrome;
 })();
-var clippyHTML = '<div id="clippy-assistant-talk-bubble" class="clippy-assistant-talk-bubble"> <span id="clippy-assistant-comment-text"></span> <div class="clippy-assistant-talk-bubble-border"></div></div><figure class="clippy-assistant-clippy"><img src="' + browser.extension.getURL('src/assets/img/clippy.png') + '" alt="Clippy"></figure>';
-var clippy = {
-    width: 150,
-    height: 139,
+
+var clippyController = {
+    agent: null,
+    lastComment: null,
     comments: {},
-    init: function() {
-        this.createElement();
+    init: function(agent) {
+        this.agent = agent
         this.fetchCommentUpdates();
     },
     talk: function () {
-        var talkBubble = document.getElementById('clippy-assistant-talk-bubble');
-        var talkTextContainer = document.getElementById('clippy-assistant-comment-text');
-        talkTextContainer.innerHTML = '';
-
         var hostname = window.location.hostname;
-        var clippyComment = null;
+        var clippyComments = [];
 
         for (var property in this.comments) {
             if (this.comments.hasOwnProperty(property)) {
                 if (hostname.indexOf(property) !== -1) {
-                    clippyComment = this.comments[property];
+                    clippyComments.push(this.comments[property]);
                     break;
                 }
             }
         }
 
-        if (clippyComment !== null) {
-            talkTextContainer.innerHTML = clippyComment
-            talkBubble.style.display = 'block';
+        if (clippyComments.length > 0) {
+            var nextComment = clippyComments[Math.floor(Math.random()*clippyComments.length)];
 
-            talkBubble.style.bottom = this.bubbleBottomOffset(talkBubble.innerHeight) + 'px'
+            if (nextComment !== this.lastComment) {
+                this.agent.speak(nextComment);
+                this.lastComment = nextComment;
+            } else {
+                this.lastComment = null;
+            }
         } else {
-            talkBubble.style.display = 'none';
+            this.agent.stopCurrent();
         }
-    },
-    bubbleBottomOffset: function (bubbleHeight) {
-        return this.height + 50 + bubbleHeight
     },
     toggle: function (state) {
-        this.element.style.display = state ? 'block' : 'none';
-    },
-    createElement: function () {
-        if (document.getElementsByClassName('clippy-assistant-container').length > 0) {
-            return;
-        }
+        state ? this.agent.show(true) : this.agent.hide(true);
+        var clippyBalloon = document.getElementsByClassName('clippy-balloon');
 
-        this.element = document.createElement('div');
-        this.element.className = 'clippy-assistant-container';
-        this.element.innerHTML = clippyHTML;
-        document.body.appendChild(this.element);
+        if (clippyBalloon.length > 0) {
+            clippyBalloon[0].style.display = state ? 'block' : 'none';
+        }
     },
     fetchCommentUpdates: function () {
         browser.runtime.sendMessage({name: 'comments'});
+    },
+    idle: function () {
+        browser.runtime.sendMessage({name: 'idle'});
     }
 };
 
 window.addEventListener('load', function () {
-    clippy.init();
+    clippy.load('Clippy', function(agent){
+        clippyController.init(agent);
 
-    browser.runtime.sendMessage({name: 'isActive'}, function(response) {
-        clippy.toggle(response.value);
+        browser.runtime.sendMessage({name: 'isActive'}, function(response) {
+            clippyController.toggle(response.value);
+
+            if (response.value) {
+                clippyController.idle();
+            }
+        });
     });
-
-    clippy.talk();
 }, false)
 
 browser.runtime.onMessage.addListener(function(request) {
     switch (request.name) {
         case 'isActive':
-            clippy.toggle(request.value)
+            clippyController.toggle(request.value)
+
+            if (request.value) {
+                clippyController.idle();
+            }
             break;
         case 'comments':
-            clippy.comments = request.value;
-            clippy.talk();
+            clippyController.comments = request.value;
+
+            browser.runtime.sendMessage({name: 'isActive'}, function(response) {
+                if (response.value) {
+                    clippyController.talk();
+                }
+            });
+            break;
+        case 'animate':
+            clippyController.agent.animate();
+            clippyController.talk();
+            browser.runtime.sendMessage({name: 'idle'});
             break;
     }
 });

@@ -13,15 +13,20 @@
   "browser_action": {
     "default_title": "Clippy Assistant",
     "default_icon": {
-      "16": "src/assets/img/clippy-icon-48x48.png",
-      "24": "src/assets/img/clippy-icon-48x48.png",
-      "32": "src/assets/img/clippy-icon-48x48.png"
+      "16": "src/assets/img/clippy-icon-gray-48x48.png",
+      "24": "src/assets/img/clippy-icon-gray-48x48.png",
+      "32": "src/assets/img/clippy-icon-gray-48x48.png"
     }
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": [
+        "src/assets/js/jquery.min.js",
+        "src/assets/js/clippy.js",
+        "src/assets/js/agent.js",
+        "src/assets/js/sounds-mp3.js",
+        "src/assets/js/sounds-ogg.js",
         "src/index.js"
       ],
       "css": [
@@ -37,7 +42,8 @@
     "persistent": true
   },
   "web_accessible_resources": [
-    "src/assets/img/clippy.png"
+    "src/assets/img/clippy.png",
+    "src/assets/img/clippy.map.png"
   ],
   "permissions": [
     "activeTab"

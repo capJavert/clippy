@@ -1,64 +1,67 @@
-.clippy-assistant-container {
-    display: none;
+.clippy, .clippy-balloon {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 2147483640;
+    z-index: 2147483647;
+    cursor: pointer;
 }
 
-.clippy-assistant-clippy {
-    width: 150px;
-    height: 139px;
+.clippy {
+    bottom: 40px;
+    right: 40px;
 }
 
-.clippy-assistant-clippy img {
-    width: 100%;
+.clippy-balloon {
+
+    background: #FFC;
+    color: black;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 5px;
+
 }
 
-.clippy-assistant-talk-bubble {
-    display: none;
-    max-width: 450px;
-    background: #fffcad;
-    color: #000000;
-    font-family: Tahoma, sans-serif;
-    font-size: 14px;
-    border-radius: 15px;
-    border: 2px solid #000000;
-    padding: 20px 10px;
+.clippy-content {
+    max-width: 200px;
+    min-width: 120px;
+    font-family: "Microsoft Sans", sans-serif;
+    font-size: 10pt;
+}
+
+.clippy-tip {
+    width: 10px;
+    height: 16px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAgCAMAAAAlvKiEAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAlQTFRF///MAAAA////52QwgAAAAAN0Uk5T//8A18oNQQAAAGxJREFUeNqs0kEOwCAIRFHn3//QTUU6xMyyxii+jQosrTPkyPEM6IN3FtzIRk1U4dFeKWQiH6pRRowMVKEmvronEynkwj0uZJgR22+YLopPSo9P34wJSamLSU7lSIWLJU7NkNomNlhqxUeAAQC+TQLZyEuJBwAAAABJRU5ErkJggg==) no-repeat;
     position: absolute;
-    bottom: 189px;
-    right: 20px;
-    z-index: 2147483641;
 }
 
-.clippy-assistant-talk-bubble:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 30px;
-    width: 0;
-    height: 0;
-    border: 20px solid transparent;
-    border-top-color: #fffcad;
-    border-bottom: 0;
-    border-left: 0;
-    margin-left: -10px;
-    margin-bottom: -20px;
-    z-index: 2147483642;
+.clippy-top-left .clippy-tip {
+    top: 100%;
+    margin-top: 0px;
+    left: 100%;
+    margin-left: -50px;
 }
 
-.clippy-assistant-talk-bubble-border:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 29px;
-    width: 0;
-    height: 0;
-    border: 23px solid transparent;
-    border-top-color: #000000;
-    border-bottom: 0;
-    border-left: 0;
-    margin-left: -12px;
-    margin-bottom: -24px;
-    z-index: 2147483641;
+.clippy-top-right .clippy-tip {
+    top: 100%;
+    margin-top: 0px;
+    left: 0;
+    margin-left: 50px;
+    background-position: -10px 0;
+
 }
+
+.clippy-bottom-right .clippy-tip {
+    top: 0;
+    margin-top: -16px;
+    left: 0;
+    margin-left: 50px;
+    background-position: -10px -16px;
+}
+
+.clippy-bottom-left .clippy-tip {
+    top: 0;
+    margin-top: -16px;
+    left: 100%;
+    margin-left: -50px;
+    background-position: 0px -16px;
+}
+

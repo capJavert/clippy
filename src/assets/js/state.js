@@ -9,6 +9,7 @@ var settings = {
     comments: {}
 }
 
+var idleTime = 15000;
 var commentsRepoURL = 'https://gist.githubusercontent.com/capJavert/2e80f4da21e4e9664f7dc04642d5fc15/raw/dee82497c1ab32c6008fdba831411db253c58598/clippy.json'
 var loadComments = function () {
     var xhttp = new XMLHttpRequest();
@@ -33,6 +34,17 @@ var loadComments = function () {
     };
     xhttp.send();
 }
+var toggleIcon = function (tab) {
+    var iconName = 'src/assets/img/clippy-icon' + (settings.isActive ? '' : '-gray');
+    browser.browserAction.setIcon({
+        path: {
+            16: iconName + '-48x48.png',
+            24: iconName + '-48x48.png',
+            32: iconName + '-48x48.png'
+        },
+        tabId: tab.id
+    });
+}
 
 browser.browserAction.onClicked.addListener(function() {
     settings.isActive = !settings.isActive;
@@ -47,15 +59,7 @@ browser.browserAction.onClicked.addListener(function() {
                 }
             );
 
-            var iconName = 'src/assets/img/clippy-icon' + (settings.isActive ? '' : '-gray');
-            browser.browserAction.setIcon({
-                path: {
-                    16: iconName + '-48x48.png',
-                    24: iconName + '-48x48.png',
-                    32: iconName + '-48x48.png'
-                },
-                tabId: tabs[index].id
-            });
+            toggleIcon(tabs[index]);
         }
     });
 });
@@ -63,6 +67,10 @@ browser.browserAction.onClicked.addListener(function() {
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     switch (request.name) {
         case 'isActive':
+            browser.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                toggleIcon(tabs[0]);
+            });
+
             sendResponse(
                 {
                     name: 'isActive',
@@ -72,6 +80,21 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             break;
         case 'comments':
             loadComments();
+            break;
+        case 'idle':
+            if (settings.isActive) {
+                setTimeout(function(){
+                    browser.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                        browser.tabs.sendMessage(
+                            tabs[0].id,
+                            {
+                                name: 'animate',
+                                value: true
+                            }
+                        );
+                    });
+                }, idleTime);
+            }
             break;
     }
 
