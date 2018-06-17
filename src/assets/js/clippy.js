@@ -761,11 +761,11 @@ clippy.Balloon.prototype = {
         c.height('auto');
         c.width('auto');
         // add the text
-        c.text(text);
+        c.html(text);
         // set height
         c.height(c.height());
         c.width(c.width());
-        c.text('');
+        c.html('');
         this.reposition();
 
         this._complete = complete;
@@ -811,7 +811,7 @@ clippy.Balloon.prototype = {
                     this.hide();
                 }
             } else {
-                el.text(words.slice(0, idx).join(' '));
+                el.html(words.slice(0, idx).join(' '));
                 idx++;
                 this._loop = window.setTimeout($.proxy(this._addWord, this), time);
             }
