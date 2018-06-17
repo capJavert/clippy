@@ -28,8 +28,9 @@ $ npm install
 
 ### Contribute
 Clippy fetches comments from public GIST file https://gist.github.com/capJavert/2e80f4da21e4e9664f7dc04642d5fc15. Feel free to contribute new comments for your favorite sites
-- Entries are filled in format 'keyword': 'comment'
-- For example sitename for github.com would be 'github', but it could also be 'com' which would add this comment for all sites containing .com in URL
+- Entries are filled in format ```"keyword": "comment"```
+- For example sitename for github.com would be 'github', but it could also be "com" which would add this comment for all sites containing ".com" in URL
+- You can also define an array of comments like ```"keyword: ["comment1", "comment2"]```
 - If there are multiple comments for the same site Clippy will pick a random one
 - For moderation purposes new comments will be added in each new Clippy extension version
 - Feel free to build and install your own version of Clippy if you don't want to wait for next update

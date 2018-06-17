@@ -13,8 +13,6 @@ var clippyController = {
     init: function(agent) {
         this.agent = agent
         this.fetchCommentUpdates();
-
-        console.log(this.agent.animations());
     },
     talk: function () {
         var hostname = window.location.hostname;
@@ -23,14 +21,23 @@ var clippyController = {
         for (var property in this.comments) {
             if (this.comments.hasOwnProperty(property)) {
                 if (hostname.indexOf(property) !== -1) {
-                    clippyComments.push(this.comments[property]);
+                    if (this.comments[property].constructor === Array) {
+                        clippyComments = clippyComments.concat(this.comments[property])
+                    } else {
+                        clippyComments.push(this.comments[property]);
+                    }
                     break;
                 }
             }
         }
 
         if (clippyComments.length > 0) {
-            var nextComment = clippyComments[Math.floor(Math.random()*clippyComments.length)];
+            var nextComment = null;
+            if (clippyComments.constructor === Array) {
+                nextComment = clippyComments[Math.floor(Math.random()*clippyComments.length)];
+            } else {
+                nextComment = clippyComments;
+            }
 
             if (nextComment !== this.lastComment) {
                 this.agent.speak(nextComment);
