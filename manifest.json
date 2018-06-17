@@ -21,14 +21,14 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
+      "css": [
+        "src/assets/css/clippy.css"
+      ],
       "js": [
         "src/assets/js/jquery.min.js",
         "src/assets/js/clippy.js",
         "src/assets/js/agent.js",
         "src/index.js"
-      ],
-      "css": [
-        "src/assets/css/clippy.css"
       ],
       "run_at": "document_end"
     }
