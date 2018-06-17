@@ -56,9 +56,7 @@ var clippyController = {
                 clippyController.agent.hide(true)
             });
         } else {
-            this.agent.play('Show', 5000, function () {
-                clippyController.agent.show(true);
-            });
+            clippyController.agent.show(true);
         }
     },
     fetchCommentUpdates: function () {
@@ -77,9 +75,8 @@ window.addEventListener('load', function () {
         clippyController.init(agent);
 
         browser.runtime.sendMessage({name: 'isActive'}, function(response) {
-            clippyController.toggle(response.value);
-
             if (response.value) {
+                clippyController.toggle(response.value);
                 clippyController.idle();
             }
         });
