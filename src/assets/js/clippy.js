@@ -695,6 +695,8 @@ clippy.Balloon.prototype = {
      */
     _position:function (side) {
         var o = this._targetEl.offset();
+        o.top -= window.pageYOffset;
+        o.left -= window.pageXOffset;
         var h = this._targetEl.height();
         var w = this._targetEl.width();
 
