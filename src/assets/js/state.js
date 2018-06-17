@@ -10,7 +10,7 @@ var settings = {
 }
 
 var idleTime = 15000;
-var commentsRepoURL = 'https://gist.githubusercontent.com/capJavert/2e80f4da21e4e9664f7dc04642d5fc15/raw/47614fcf84ccad536b098a970bce8e7e90a50738/clippy.json'
+var commentsRepoURL = 'https://raw.githubusercontent.com/capJavert/capJavert.github.io/master/clippy/clippy.json'
 var loadComments = function () {
     var xhttp = new XMLHttpRequest();
     xhttp.open('GET', commentsRepoURL, true);
