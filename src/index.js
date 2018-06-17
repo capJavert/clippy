@@ -53,7 +53,7 @@ var clippyController = {
         var clippyBalloon = document.getElementsByClassName('clippy-balloon');
 
         if (clippyBalloon.length > 0) {
-            clippyBalloon[0].style.display = state ? 'block' : 'none';
+            clippyBalloon[0].style.display = state && clippyBalloon[0].innerText.length > 0 ? 'block' : 'none';
         }
 
         this.agent.stop();
