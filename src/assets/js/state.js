@@ -89,6 +89,10 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         case 'idle':
             if (settings.isActive) {
                 setTimeout(function(){
+                    if (!settings.isActive) {
+                        return;
+                    }
+
                     browser.tabs.query({active: true, currentWindow: true}, function(tabs) {
                         if (tabs.length > 0) {
                             browser.tabs.sendMessage(
