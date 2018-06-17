@@ -109,9 +109,13 @@ browser.runtime.onMessage.addListener(function(request) {
             });
             break;
         case 'animate':
-            clippyController.animate();
-            clippyController.talk();
-            browser.runtime.sendMessage({name: 'idle'});
+            browser.runtime.sendMessage({name: 'isActive'}, function(response) {
+                if (response.value) {
+                    clippyController.animate();
+                    clippyController.talk();
+                    browser.runtime.sendMessage({name: 'idle'});
+                }
+            });
             break;
     }
 });
