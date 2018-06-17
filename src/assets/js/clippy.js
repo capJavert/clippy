@@ -764,7 +764,7 @@ clippy.Balloon.prototype = {
         c.html(text);
         // set height
         c.height(c.height());
-        c.width(c.width());
+        c.width(c.width() + 10);
         c.html('');
         this.reposition();
 
