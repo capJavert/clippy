@@ -4,7 +4,8 @@
   "description": "Clippy MS Word Office asistant is now back to help inside your browser!",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "web-ext build --ignore-files package*.json src/assets/img/screenshots"
   },
   "repository": {
     "type": "git",
