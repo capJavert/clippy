@@ -100,21 +100,17 @@ browser.runtime.onMessage.addListener(function(request) {
             }
             break;
         case 'comments':
-            clippyController.comments = request.value;
-
-            browser.runtime.sendMessage({name: 'isActive'}, function(response) {
-                if (response.value) {
-                    clippyController.talk();
-                }
-            });
+            clippyController.comments = request.value
             break;
         case 'animate':
+            clippyController.fetchCommentUpdates()
+
             browser.runtime.sendMessage({name: 'isActive'}, function(response) {
                 if (response.value) {
                     clippyController.agent.stop();
                     clippyController.talk();
                     clippyController.animate(function () {
-                        browser.runtime.sendMessage({name: 'idle'});
+                        clippyController.idle()
                     });
                 }
             });
