@@ -3,5 +3,11 @@
 const ghpages = require('gh-pages')
 
 ghpages.publish('dist', function(err) {
-  console.error(err)
+  if (typeof err !== 'undefined') {
+    console.log('Publish failed or up to date')
+  } else {
+    console.log('Publish successful')
+  }
+
+  console.log('Link:', 'https://kickass.website/clippy')
 })
