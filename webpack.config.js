@@ -48,6 +48,13 @@ module.exports = env => {
     module: {
       rules: [
         {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader'
+          }
+        },
+        {
           test: /\.scss$/,
           use: [
             isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
