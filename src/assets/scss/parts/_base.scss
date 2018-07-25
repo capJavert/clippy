@@ -11,15 +11,19 @@
    ========================================================================== */
 
 html {
-    color: #222;
+    color: #222222;
     font-size: 1em;
     line-height: 1.4;
 }
 
 body {
-   background: #121217;
+   background: #19191f;
    color: #FFFFFF;
    font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+
+    &.fixed {
+      padding-top: remc($header-size);
+    }
 }
 
 /*

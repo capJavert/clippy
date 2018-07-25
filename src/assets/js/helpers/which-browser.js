@@ -5,22 +5,22 @@ export var BrowserEnum = Object.freeze({
   safari: 'SAFARI_BROWSER',
   ie: 'SHIT_BROWSER',
   edge: 'EDGE_BROWSER'
-});
+})
 
 export function whichBrowser() {
   if((!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0) {
-    return BrowserEnum.opera;
+    return BrowserEnum.opera
   }
 
   if(typeof InstallTrigger !== 'undefined') {
-    return BrowserEnum.firefox;
+    return BrowserEnum.firefox
   }
 
   if(!!window.chrome && !!window.chrome.webstore) {
-    return BrowserEnum.chrome;
+    return BrowserEnum.chrome
   }
 
-  if(/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)) {
+  if(/constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]" })(!window['safari'] || safari.pushNotification)) {
     return BrowserEnum.safari
   }
 

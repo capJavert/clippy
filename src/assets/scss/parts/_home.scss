@@ -2,38 +2,206 @@
    Home page
    ========================================================================== */
 
-   h1,
-   h2,
-   h3,
-   h4,
-   h5,
-   h6 {
-     color: #FFFFFF;
-     text-align: center;
-     text-transform: uppercase;
-   }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+ color: #FFFFFF;
+ text-align: center;
+ font-weight: 500;
+}
 
-   .WIP-notice {
-     background: #f4d41d;
-     box-sizing: border-box;
-     padding: 15px;
-     width: 100%;
-     color: #000000;
-     font-weight: bold;
-     margin-bottom: 20px;
-   }
+.WIP-notice {
+  background: #f4d41d;
+  box-sizing: border-box;
+  padding: 15px;
+  width: 100%;
+  color: #000000;
+  font-weight: bold;
 
-   a {
-     color: #20F7DE;
-   }
+  .fa {
+    margin-right: remc(15);
+  }
+}
 
-   h1 {
-     line-height: 5rem;
-     margin-bottom: 0;
-     font-size: 5rem;
-   }
+a {
+  color: #6bf;
+  text-decoration: none;
 
-   h2 {
-     margin-top: 0;
-     font-size: 1.95rem;
-   }
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+h1 {
+  margin-top: 8rem;
+  color: #63636e;
+  margin-bottom: 0.15rem;
+  font-size: remc(28);
+}
+
+h2 {
+  margin-top: 0;
+  font-size: remc(64);
+  line-height: remc(68);
+}
+
+.Header {
+  width: 100%;
+  background: #000000;
+  padding: remc($navigation-gap/2) remc($navigation-gap);
+  box-sizing: border-box;
+
+  &-main {
+    max-width: remc(980);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: remc($header-size+$navigation-gap*2) auto;
+  }
+
+  &-fixed {
+    top: 0;
+    position: fixed;
+  }
+
+  &-logo {
+    width: remc($header-size);
+    height: remc($header-size);
+    background-image: url("/img/logo.png");
+    background-size: remc($header-size) remc($header-size);
+    background-repeat: no-repeat;
+  }
+
+  &-download {
+    width: 100%;
+    max-width: remc(980);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: remc(15) 0;
+    border-bottom: .5px solid #38383a;
+    box-sizing: border-box;
+
+    .Extension-name {
+      font-size: remc(24);
+      line-height: remc(26);
+    }
+
+    .Extension-actions {
+      text-align: right;
+    }
+  }
+}
+
+.Navigation {
+  &-link {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: remc(20);
+    height: remc($header-size);
+    line-height: remc($header-size);
+    margin: 0 remc($navigation-gap);
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.Button {
+  background: #0070c9;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: remc(5) remc(10);
+  border-radius: remc(5);
+  box-sizing: border-box;
+  font-size: remc(16);
+  display: inline-block;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &-download-chrome {
+    &:before {
+      content: "\f268";
+      font-family: "Font Awesome 5 Brands";
+      margin-right: remc(10);
+    }
+  }
+
+  &-download-firefox {
+    &:before {
+      content: "\f269";
+      font-family: "Font Awesome 5 Brands";
+      margin-right: remc(10);
+    }
+  }
+
+  &-download-opera {
+    &:before {
+      content: "\f26a";
+      font-family: "Font Awesome 5 Brands";
+      margin-right: remc(10);
+    }
+  }
+
+  &-download {
+    font-size: remc(24);
+    padding: remc(10) remc(15);
+
+    &:before {
+      margin-right: remc(15);
+    }
+  }
+}
+
+.Section {
+  margin: remc(120) auto;
+  max-width: remc(980);
+}
+
+.Section-download {
+  .Download-container {
+    margin: 0 auto;
+    text-align: center;
+
+    .Button {
+      margin: 0 remc(10);
+    }
+  }
+
+  .Help-text {
+    margin-top: remc(30);
+  }
+}
+
+.Text {
+  font-weight: 400;
+  font-size: remc(24);
+  color: #63636e;
+  line-height: remc(32);
+
+  &-center {
+    text-align: center;
+  }
+
+  &-left {
+    text-align: left;
+  }
+
+  &-right {
+    text-align: right;
+  }
+
+  &-small {
+    font-size: remc(20);
+    line-height: remc(28);
+  }
+}

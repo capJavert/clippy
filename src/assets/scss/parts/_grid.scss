@@ -1,0 +1,20 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-column-gap: remc(30);
+  grid-row-gap: remc(30);
+}
+
+@for $i from 1 through 12 {
+  .width-#{$i}-12 {
+      grid-column: span $i;
+  }
+}
+
+@media (max-width: 768px) {
+  @for $i from 1 through 12 {
+    .width-#{$i}-12 {
+        grid-column: span 12;
+    }
+  }
+}

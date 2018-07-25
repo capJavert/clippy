@@ -1,0 +1,26 @@
+/*
+|--------------------------------------------------------------------------
+| Utilities
+|--------------------------------------------------------------------------
+*/
+
+// Convert pixels into rems
+@function remc($size) {
+    $remSize: $size / $base-font-size;
+    @return #{$remSize}rem;
+}
+
+@mixin desktop {
+    @media (min-width: 1025px) {
+        @content;
+    }
+}
+
+// Z-Index mapping
+@function z-index($key) {
+    @return map-get($z-index, $key);
+}
+
+@mixin z-index($key) {
+    z-index: z-index($key);
+}

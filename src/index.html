@@ -8,34 +8,45 @@
   <meta name="author" content="capJavert">
   <meta name="description" content="Clippy MS Word Office asistant is now back to assist inside your browser!">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 
 <body>
   <!--[if lte IE 9]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a target="_blank" href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 
   <div class="container">
     <div class="WIP-notice">
-      Clippy is still trying to help this website.. as you can see.. check back soon!
+      <i class="fa fa-wrench"></i>Clippy is still trying to help this website.. as you can see.. check back soon!
     </div>
-    <header>
-      <div class="logo">
-        Logo
+    <header class="Header">
+      <div class="Header-main">
+        <div class="Header-logo"></div>
+        <nav class="Navigation">
+          <a href="#about" class="Navigation-link" >About</a>
+          <a href="#contribute" class="Navigation-link" >Contribute</a>
+          <a href="#code&support" class="Navigation-link" >Code & Support</a>
+        </nav>
       </div>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#download">Download</a>
-        <a href="#contribute">Contribute</a>
-        <a href="#code&support">Code & Support</a>
-      </nav>
     </header>
     <main>
-      <section class="Section Section-about" id="about">
-        <h1>Clippy is back!</h1>
-        <h2>Back to "assist" inside your browser! </h2>
+      <aside class="Header-download">
+        <div class="Extension-name">
+          Clippy Assistant
+        </div>
 
-        <p>
+        <div class="Extension-actions">
+          <a class="Button" href="#download">Download</a>
+        </div>
+      </aside>
+
+      <section class="Section Section-about" id="about">
+        <h1>Clippy is back</h1>
+        <h2>Every&nbsp;website.<br />Every momment.<br />Every tab.</h2>
+
+        <p class="Text Text-left">
           Clippy MS Office assistant is now back to assist inside your browser! Add-on will add Clippy inside every website. Clippy will make random comments depending on the website. You can turn him off if he gets to grumpy, or back on if you need help!
         </p>
       </section>
@@ -43,12 +54,15 @@
       <section class="Section Section-download" id="download">
         <h2>Download</h2>
 
-        <a href="https://chrome.google.com/webstore/detail/clippy/oaknkllfdceggjpbonhiegoaifjdkfjd" class="Button Button-download Button-download-chrome">Chrome</a>
-        <a href="https://addons.mozilla.org/en-US/firefox/addon/clippy-assistant/" class="Button Button-download Button-download-firefox">Firefox</a>
-        <a href="https://addons.opera.com/en/extensions/details/clippy/" class="Button Button-download Button-download-opera">Opera</a>
-        <a href="https://github.com/capJavert/clippy/releases/download/v1.4/clippy-1.4.zip" class="Button Button-download">Other</a>
-        <p>
-          For help installing on other browsers supporting web extensions check this <a href="https://github.com/capJavert/clippy#the-code">link</a>.
+        <div class="Download-container">
+          <a target="_blank" href="https://chrome.google.com/webstore/detail/clippy/oaknkllfdceggjpbonhiegoaifjdkfjd" class="Button Button-download Button-download-chrome">Add to Chrome</a>
+          <a target="_blank" href="https://addons.mozilla.org/en-US/firefox/addon/clippy-assistant/" class="Button Button-download Button-download-firefox">Add to Firefox</a>
+          <a target="_blank" href="https://addons.opera.com/en/extensions/details/clippy/" class="Button Button-download Button-download-opera">Add to Opera</a>
+          <a target="_blank" href="https://github.com/capJavert/clippy/releases/download/v1.4/clippy-1.4.zip" class="Button Button-download">Other Browsers</a>
+        </div>
+
+        <p class="Text Text-center Text-small Help-text">
+          For help installing on other browsers supporting web extensions check this <a target="_blank" href="https://github.com/capJavert/clippy#the-code">link</a>.
         </p>
       </section>
 
@@ -56,7 +70,7 @@
         <h2>Contribute</h2>
 
         <p>
-          Clippy fetches comments from my <a href="https://github.com/capJavert/clippy-dictionary/blob/master/clippy.json">personal repository file</a> - Feel free to contribute new comments for your favorite sites by making a pull request!
+          Clippy fetches comments from my <a target="_blank" href="https://github.com/capJavert/clippy-dictionary/blob/master/clippy.json">personal repository file</a> - Feel free to contribute new comments for your favorite sites by making a pull request!
         </p>
 
         <ul>
@@ -85,7 +99,7 @@
         <h2>Code & Support</h2>
 
         <p>
-          The full source code is available <a href="https://github.com/capJavert/clippy">here</a>. Feel free to contribute, share and use it in your own projects.
+          The full source code is available <a target="_blank" href="https://github.com/capJavert/clippy">here</a>. Feel free to contribute, share and use it in your own projects.
         </p>
         <p>
           If you have any problems with the code, have some new idea or suggestion please consult the links below:
@@ -93,13 +107,13 @@
 
         <ul>
           <li>
-            <a href="https://github.com/capJavert/clippy/blob/master/README.md">Info and help</a>
+            <a target="_blank" href="https://github.com/capJavert/clippy/blob/master/README.md">Info and help</a>
           </li>
           <li>
-            <a href="https://github.com/capJavert/clippy/issues">Submit an Issue</a>
+            <a target="_blank" href="https://github.com/capJavert/clippy/issues">Submit an Issue</a>
           </li>
           <li>
-            <a href="http://kickass.website/me">Contact me</a>
+            <a target="_blank" href="http://kickass.website/me">Contact me</a>
           </li>
         </ul>
       </section>
