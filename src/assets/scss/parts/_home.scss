@@ -27,7 +27,7 @@ h6 {
 }
 
 a {
-  color: #6bf;
+  color: #66bbff;
   text-decoration: none;
 
   &:hover {
@@ -103,6 +103,12 @@ h2 {
     height: remc($header-size);
     line-height: remc($header-size);
     margin: 0 remc($navigation-gap);
+    transition: opacity 300ms;
+
+    &:hover {
+      opacity: .65;
+      text-decoration: none;
+    }
 
     &:first-child {
       margin-left: 0;
@@ -123,8 +129,10 @@ h2 {
   box-sizing: border-box;
   font-size: remc(16);
   display: inline-block;
+  transition: background 300ms;
 
   &:hover {
+    background: #0162af;
     text-decoration: none;
   }
 
