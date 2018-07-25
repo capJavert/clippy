@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Home page
+   ========================================================================== */
+
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   h6 {
+     color: #FFFFFF;
+     text-align: center;
+     text-transform: uppercase;
+   }
+
+   .WIP-notice {
+     background: #f4d41d;
+     box-sizing: border-box;
+     padding: 15px;
+     width: 100%;
+     color: #000000;
+     font-weight: bold;
+     margin-bottom: 20px;
+   }
+
+   a {
+     color: #20F7DE;
+   }
+
+   h1 {
+     line-height: 5rem;
+     margin-bottom: 0;
+     font-size: 5rem;
+   }
+
+   h2 {
+     margin-top: 0;
+     font-size: 1.95rem;
+   }
