@@ -24,7 +24,6 @@ module.exports = env => {
     }),
     new CopyWebpackPlugin([
       { from: './src/assets/js/vendor', to: 'js/vendor' },
-      { from: './src/assets/img', to: 'img' },
       { from: './src/favicon.ico' }
     ]),
     new CleanWebpackPlugin(
@@ -71,6 +70,15 @@ module.exports = env => {
               removeComments: false
             }
           }],
+        },
+        {
+          test: /\.(jpe?g|gif|png|svg)$/,
+          loader: "file-loader",
+          options: {
+            name: '[name].[hash].[ext]',
+            publicPath: 'img/',
+            outputPath: 'img/'
+          }
         }
       ]
     },
