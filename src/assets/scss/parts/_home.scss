@@ -213,3 +213,19 @@ h2 {
     line-height: remc(28);
   }
 }
+
+$posterSize: 360;
+.PosterImage {
+  width: remc($posterSize);
+  height: remc($posterSize);
+  margin: remc(80) auto;
+  background-image: url("../img/logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &-container {
+    width: 100%;
+    max-width: remc($posterSize);
+    margin: remc(80) auto;
+  }
+}
