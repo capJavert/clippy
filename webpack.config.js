@@ -39,7 +39,7 @@ module.exports = env => {
 
   console.log('Production:', isProduction)
 
-  return {
+  let config = {
     entry: './src/index.js',
     output: {
       path: path.resolve(__dirname, 'dist'),
@@ -76,4 +76,19 @@ module.exports = env => {
     },
     plugins: isProduction ? devPlugins.concat(plugins) : devPlugins
   }
+
+  if (isProduction) {
+    config.optimization = {
+      minimizer: [
+        new UglifyJsPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true
+        }),
+        new OptimizeCSSAssetsPlugin({})
+      ]
+    }
+  }
+
+  return config
 }
