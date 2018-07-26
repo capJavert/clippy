@@ -11,7 +11,7 @@ var clippyController = {
     animations: ['Congratulate', 'LookRight', 'SendMail', 'Thinking', 'Explain', 'IdleRopePile', 'IdleAtom', 'Print', 'GetAttention', 'Save', 'GetTechy', 'GestureUp', 'Idle1_1', 'Processing', 'Alert', 'LookUpRight', 'IdleSideToSide', 'LookLeft', 'IdleHeadScratch', 'LookUpLeft', 'CheckingSomething', 'Hearing_1', 'GetWizardy', 'IdleFingerTap', 'GestureLeft', 'Wave', 'GestureRight', 'Writing', 'IdleSnooze', 'LookDownRight', 'GetArtsy', 'LookDown', 'Searching', 'EmptyTrash', 'LookUp', 'GestureDown', 'RestPose', 'IdleEyeBrowRaise', 'LookDownLeft'],
     comments: {},
     init: function(agent) {
-        this.agent = agent
+        this.agent = agent;
         this.fetchCommentUpdates();
 
         browser.runtime.sendMessage({name: 'isActive'}, function(response) {
@@ -29,11 +29,10 @@ var clippyController = {
             if (this.comments.hasOwnProperty(property)) {
                 if (hostname.indexOf(property) !== -1) {
                     if (this.comments[property].constructor === Array) {
-                        clippyComments = clippyComments.concat(this.comments[property])
+                        clippyComments = clippyComments.concat(this.comments[property]);
                     } else {
                         clippyComments.push(this.comments[property]);
                     }
-                    break;
                 }
             }
         }
@@ -67,7 +66,7 @@ var clippyController = {
 
         if (!state) {
             this.agent.play('GoodBye', 5000, function () {
-                clippyController.agent.hide(true)
+                clippyController.agent.hide(true);
             });
         } else {
             clippyController.agent.show(true);
@@ -80,7 +79,7 @@ var clippyController = {
         browser.runtime.sendMessage({name: 'idle'});
     },
     animate: function (callback) {
-        this.agent.play(this.animations[Math.floor(Math.random()*this.animations.length)], 5000, callback)
+        this.agent.play(this.animations[Math.floor(Math.random()*this.animations.length)], 5000, callback);
     }
 };
 
@@ -93,24 +92,28 @@ window.addEventListener('load', function () {
 browser.runtime.onMessage.addListener(function(request) {
     switch (request.name) {
         case 'isActive':
-            clippyController.toggle(request.value)
+            clippyController.toggle(request.value);
 
             if (request.value) {
                 clippyController.idle();
             }
             break;
         case 'comments':
-            clippyController.comments = request.value
+            clippyController.comments = request.value;
             break;
         case 'animate':
-            clippyController.fetchCommentUpdates()
+            if(!clippyController.agent) {
+              return;
+            }
+
+            clippyController.fetchCommentUpdates();
 
             browser.runtime.sendMessage({name: 'isActive'}, function(response) {
                 if (response.value) {
                     clippyController.agent.stop();
                     clippyController.talk();
                     clippyController.animate(function () {
-                        clippyController.idle()
+                        clippyController.idle();
                     });
                 }
             });
