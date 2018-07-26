@@ -21,8 +21,19 @@ body {
    color: #FFFFFF;
    font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 
-    &.fixed {
-      padding-top: remc($header-size);
+    &.Fixed {
+      .Header,
+      .WIP-notice {
+        visibility: hidden;
+      }
+
+      &-header {
+        margin-top: remc($header-size);
+      }
+
+      &-toolbar {
+        margin-top: remc($toolbar-size);
+      }
     }
 }
 

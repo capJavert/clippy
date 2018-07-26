@@ -82,8 +82,10 @@ function toggleStickyNavigation(activationPoint, element) {
   if(documentOffsetTop >= activationPoint && documentOffsetTop != 0) {
     element.classList.add('Toolbar-fixed')
     element.classList.add('Toolbar-opaque')
+    document.body.className = 'Fixed Fixed-toolbar'
   } else {
     element.classList.remove('Toolbar-fixed')
     element.classList.remove('Toolbar-opaque')
+    document.body.className = null
   }
 }
