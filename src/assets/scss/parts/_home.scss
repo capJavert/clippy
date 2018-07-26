@@ -173,6 +173,8 @@ h2 {
 .Section {
   margin: remc(120) auto;
   max-width: remc(980);
+  padding: 0 remc(20);
+  box-sizing: border-box;
 }
 
 .Section-download {
@@ -216,13 +218,6 @@ h2 {
 
 $posterSize: 360;
 .PosterImage {
-  width: remc($posterSize);
-  height: remc($posterSize);
-  margin: remc(80) auto;
-  background-image: url("../img/logo.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-
   &-container {
     width: 100%;
     max-width: remc($posterSize);
