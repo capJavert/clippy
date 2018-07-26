@@ -33,6 +33,14 @@ a {
   &:hover {
     text-decoration: underline;
   }
+
+  &.incognito {
+    color: inherit;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 h1 {
@@ -70,9 +78,29 @@ h2 {
     height: remc($header-size);
     transform: rotate(90deg);
   }
+}
 
-  &-download {
-    width: 100%;
+.Toolbar {
+  width: 100%;
+  margin: 0 auto;
+  transition: background 300ms;
+
+  &-fixed {
+    top: 0;
+    position: fixed;
+  }
+
+  &-opaque {
+    transition: background 300ms;
+    background: rgba(34, 34, 34, .9);
+    border-bottom: .5px solid #38383a;
+
+    * {
+      border: 0 !important;
+    }
+  }
+
+  &-narrow {
     max-width: remc(980);
     margin: 0 auto;
     display: grid;
@@ -80,15 +108,15 @@ h2 {
     padding: remc(15) 0;
     border-bottom: .5px solid #38383a;
     box-sizing: border-box;
+  }
 
-    .Extension-name {
-      font-size: remc(24);
-      line-height: remc(26);
-    }
+  .Toolbar-name {
+    font-size: remc(24);
+    line-height: remc(26);
+  }
 
-    .Extension-actions {
-      text-align: right;
-    }
+  .Toolbar-actions {
+    text-align: right;
   }
 }
 
@@ -235,5 +263,12 @@ $posterSize: 360;
     width: 100%;
     max-width: remc($posterSize);
     margin: remc(80) auto;
+  }
+}
+
+@media (max-width: remc(1010)) {
+  .Toolbar-narrow {
+    padding-left: remc(15);
+    padding-right: remc(15);
   }
 }

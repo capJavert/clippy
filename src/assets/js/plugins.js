@@ -21,4 +21,4 @@
   }
 }())
 
-// Place any jQuery/helper plugins in here.
+// Place any helper plugins in here.

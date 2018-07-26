@@ -23,13 +23,14 @@ window.onload = () => {
     }
   }
 
-  animatePosterLogo();
-  adjustClippyLogo();
+  animatePosterLogo()
+  adjustClippyLogo()
+  stickyNavigation()
 }
 
 function animatePosterLogo() {
   const svgDocument = document.querySelector('.PosterImage-object').contentDocument
-  const foregroundCircle = svgDocument.querySelector('.ForegroundCircle');
+  const foregroundCircle = svgDocument.querySelector('.ForegroundCircle')
   const backgroundCircle = svgDocument.querySelector('.BackgroundCircle')
   const gradient1 = {
     1: svgDocument.querySelector('.Gradient1-1'),
@@ -50,15 +51,39 @@ function animatePosterLogo() {
     TweenLite.to(gradient1[1], .4, {stopColor: 'rgb(' + color[1].toString() + ')'})
     TweenLite.to(gradient1[2], .4, {stopColor: 'rgb(' + color[2].toString() + ')'})
     TweenLite.to(gradient1[3], .4, {stopColor: 'rgb(' + color[3].toString() + ')'})
-  }, 600);
+  }, 600)
 }
 
 function adjustClippyLogo() {
   const svgDocument = document.querySelector('.Header-logo object').contentDocument
-  const foregroundCircle = svgDocument.querySelector('.ForegroundCircle');
+  const foregroundCircle = svgDocument.querySelector('.ForegroundCircle')
   const backgroundCircle = svgDocument.querySelector('.BackgroundCircle')
 
   foregroundCircle.setAttribute('stroke-width', 4)
   foregroundCircle.setAttribute('r', 14)
   backgroundCircle.setAttribute('r', 20)
+}
+
+function stickyNavigation() {
+  const headerDownloadElem = document.querySelector('.Toolbar-download')
+  const headerMainElem = document.querySelector('.Header-main')
+  const stickyActivationPoint = headerMainElem.offsetTop + headerMainElem.offsetHeight
+
+  toggleStickyNavigation(stickyActivationPoint, headerDownloadElem)
+  window.onscroll = () => {
+    toggleStickyNavigation(stickyActivationPoint, headerDownloadElem)
+  }
+}
+
+function toggleStickyNavigation(activationPoint, element) {
+  const documentElement = document.documentElement
+  const documentOffsetTop = (window.pageYOffset || documentElement.scrollTop)  - (documentElement.clientTop || 0)
+
+  if(documentOffsetTop >= activationPoint && documentOffsetTop != 0) {
+    element.classList.add('Toolbar-fixed')
+    element.classList.add('Toolbar-opaque')
+  } else {
+    element.classList.remove('Toolbar-fixed')
+    element.classList.remove('Toolbar-opaque')
+  }
 }
