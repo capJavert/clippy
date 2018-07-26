@@ -61,7 +61,7 @@ module.exports = env => {
             'sass-loader',
           ],
         },
-        {
+        /*{
           test: /\.html$/,
           use: [ {
             loader: 'html-loader',
@@ -70,12 +70,12 @@ module.exports = env => {
               removeComments: false
             }
           }],
-        },
+        },*/
         {
           test: /\.(jpe?g|gif|png|svg)$/,
           loader: "file-loader",
           options: {
-            name: '[name].[hash].[ext]',
+            name: isProduction ? '[name].[hash].[ext]' : '[name].[ext]',
             publicPath: 'img/',
             outputPath: 'img/'
           }

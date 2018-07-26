@@ -27,12 +27,13 @@ window.onload = () => {
 }
 
 function animatePosterLogo() {
-  const foregroundCircle = document.getElementById('ForegroundCircle');
-  const backgroundCircle = document.getElementById('BackgroundCircle')
+  const svgDocument = document.querySelector('.PosterImage-object').contentDocument
+  const foregroundCircle = svgDocument.querySelector('.ForegroundCircle');
+  const backgroundCircle = svgDocument.querySelector('.BackgroundCircle')
   const gradient1 = {
-    1: document.getElementById('Gradient1-1'),
-    2: document.getElementById('Gradient1-2'),
-    3: document.getElementById('Gradient1-3')
+    1: svgDocument.querySelector('.Gradient1-1'),
+    2: svgDocument.querySelector('.Gradient1-2'),
+    3: svgDocument.querySelector('.Gradient1-3')
   }
 
   setInterval(function() {
