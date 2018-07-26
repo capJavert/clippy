@@ -36,7 +36,6 @@ a {
 }
 
 h1 {
-  margin-top: 8rem;
   color: #63636e;
   margin-bottom: 0.15rem;
   font-size: remc(28);
@@ -172,9 +171,9 @@ h2 {
 }
 
 .Section {
-  margin: remc(120) auto;
+  margin: 0 auto;
   max-width: remc(980);
-  padding: 0 remc(20);
+  padding: remc(80) remc(20);
   box-sizing: border-box;
 }
 
@@ -196,7 +195,7 @@ h2 {
 .Text {
   font-weight: 400;
   font-size: remc(24);
-  color: #63636e;
+  color: #aaaab7;
   line-height: remc(32);
 
   &-center {
@@ -214,6 +213,22 @@ h2 {
   &-small {
     font-size: remc(20);
     line-height: remc(28);
+  }
+
+  &-highlight {
+    color: #ffffff;
+  }
+}
+
+.List {
+  font-weight: 400;
+  font-size: remc(22);
+  color: #aaaab7;
+  line-height: remc(30);
+  margin-top: remc(40);
+
+  li {
+    margin: remc(15) 0;
   }
 }
 

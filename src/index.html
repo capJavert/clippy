@@ -47,7 +47,7 @@
         <h2>Every&nbsp;website.<br />Every momment.<br />Every tab.</h2>
 
         <div class="PosterImage-container">
-          <object class="PosterImage-object" data="<%=require('./assets/img/logo.svg')%>" />
+          <object class="PosterImage-object" data="<%=require('./assets/img/logo.svg')%>"></object>
         </div>
 
         <p class="Text Text-left">
@@ -73,27 +73,33 @@
       <section class="Section Section-contribute" id="contribute">
         <h2>Contribute</h2>
 
-        <p>
+        <p class="Text Text-left">
           Clippy fetches comments from my <a target="_blank" href="https://github.com/capJavert/clippy-dictionary/blob/master/clippy.json">personal repository file</a> - Feel free to contribute new comments for your favorite sites by making a pull request!
         </p>
 
-        <ul>
+        <ul class="List fa-ul">
           <li>
-            Entries are filled in format "keyword": "comment"
+            <i class="fa-li fa fa-angle-right"></i>
+            Entries are filled in format <span class="Text-highlight">"keyword": "comment"</span>
           </li>
           <li>
-            For example sitename for github.com would be 'github', but it could also be "com" which would add this comment for all sites containing ".com" in URL
+            <i class="fa-li fa fa-angle-right"></i>
+            For example sitename for <span class="Text-highlight">github.com</span> would be <span class="Text-highlight">'github'</span>, but it could also be <span class="Text-highlight">"com"</span> which would add this comment for all sites containing <span class="Text-highlight">".com"</span> in URL
           </li>
           <li>
-            You can also define an array of comments like "keyword: ["comment1", "comment2"]
+            <i class="fa-li fa fa-angle-right"></i>
+            You can also define an array of comments like "keyword: <span class="Text-highlight">["comment1", "comment2"]</span>
           </li>
           <li>
+            <i class="fa-li fa fa-angle-right"></i>
             If there are multiple comments for the same site Clippy will pick a random one
           </li>
           <li>
+            <i class="fa-li fa fa-angle-right"></i>
             I will try to merge any pull requests on regular basis
           </li>
           <li>
+            <i class="fa-li fa fa-angle-right"></i>
             Feel free to build and install your own version of Clippy if you don't want to wait for next update
           </li>
         </ul>
@@ -102,29 +108,40 @@
       <section class="Section Section-code" id="code&support">
         <h2>Code & Support</h2>
 
-        <p>
+        <p class="Text Text-left">
           The full source code is available <a target="_blank" href="https://github.com/capJavert/clippy">here</a>. Feel free to contribute, share and use it in your own projects.
         </p>
-        <p>
+        <p class="Text Text-left">
           If you have any problems with the code, have some new idea or suggestion please consult the links below:
         </p>
 
-        <ul>
+        <ul class="List fa-ul">
           <li>
-            <a target="_blank" href="https://github.com/capJavert/clippy/blob/master/README.md">Info and help</a>
+            <a target="_blank" href="https://github.com/capJavert/clippy/blob/master/README.md">
+              <i class="fa-li fa fa-question-circle"></i>
+              Info and help
+            </a>
           </li>
           <li>
-            <a target="_blank" href="https://github.com/capJavert/clippy/issues">Submit an Issue</a>
+            <a target="_blank" href="https://github.com/capJavert/clippy/issues">
+              <i class="fa-li fa fa-bug"></i>
+              Submit an Issue
+            </a>
           </li>
           <li>
-            <a target="_blank" href="http://kickass.website/me">Contact me</a>
+            <a target="_blank" href="http://kickass.website/me">
+              <i class="fa-li fa fa-at"></i>
+              Contact me
+            </a>
           </li>
         </ul>
       </section>
     </main>
 
     <footer>
-      Copyright &copy; Ante Barić (capJavert) 2018
+      <p class="Text Text-center Text-small">
+        Copyright &copy; Ante Barić (capJavert) 2018
+      </p>
     </footer>
   </div>
 
