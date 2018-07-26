@@ -24,6 +24,7 @@ window.onload = () => {
   }
 
   animatePosterLogo();
+  adjustClippyLogo();
 }
 
 function animatePosterLogo() {
@@ -50,4 +51,14 @@ function animatePosterLogo() {
     TweenLite.to(gradient1[2], .4, {stopColor: 'rgb(' + color[2].toString() + ')'})
     TweenLite.to(gradient1[3], .4, {stopColor: 'rgb(' + color[3].toString() + ')'})
   }, 600);
+}
+
+function adjustClippyLogo() {
+  const svgDocument = document.querySelector('.Header-logo object').contentDocument
+  const foregroundCircle = svgDocument.querySelector('.ForegroundCircle');
+  const backgroundCircle = svgDocument.querySelector('.BackgroundCircle')
+
+  foregroundCircle.setAttribute('stroke-width', 4)
+  foregroundCircle.setAttribute('r', 14)
+  backgroundCircle.setAttribute('r', 20)
 }

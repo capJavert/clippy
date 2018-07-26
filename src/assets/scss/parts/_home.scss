@@ -68,9 +68,6 @@ h2 {
   &-logo {
     width: remc($header-size);
     height: remc($header-size);
-    background-image: url("../img/logo.svg");
-    background-size: remc($header-size) remc($header-size);
-    background-repeat: no-repeat;
     transform: rotate(90deg);
   }
 
