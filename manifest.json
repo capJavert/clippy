@@ -36,6 +36,7 @@
   ],
   "background": {
     "scripts": [
+      "src/assets/js/local-storage-object.js",
       "src/assets/js/state.js"
     ],
     "persistent": true
