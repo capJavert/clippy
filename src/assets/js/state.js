@@ -4,10 +4,46 @@ var browser = (function () {
         browser ||
         chrome;
 })();
+
 var settings = {
-    isActive: true,
-    comments: {}
+  init() {
+    this._load();
+  },
+  _temp: {
+      isActive: true,
+      comments: {}
+  },
+  _persist: function() {
+    if(this._temp) {
+      localStorage.setItem('settings', JSON.stringify(this._temp));
+    }
+  },
+  _load: function() {
+    var temp = localStorage.getItem('settings');
+    if(temp) {
+      this._temp = JSON.parse(temp);
+    }
+  },
+  // isActive
+  get isActive() {
+    this._load();
+    return this._temp.isActive
+  },
+  set isActive(value) {
+    this._temp.isActive = value
+    this._persist()
+  },
+  // comments
+  get comments() {
+    this._load();
+    return this._temp.comments
+  },
+  set comments(value) {
+    this._temp.comments = value
+    this._persist()
+  }
 }
+settings.init();
 
 var idleTime = 15000;
 var commentsRepoURL = 'https://raw.githubusercontent.com/capJavert/clippy-dictionary/master/clippy.json'
