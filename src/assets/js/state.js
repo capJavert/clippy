@@ -5,12 +5,13 @@ var browser = (function () {
         chrome;
 })();
 
-var settings = LocalStorageObject.create(
+var settings = new webStorageObject.LocalStorageObject(
   {
     isActive: true,
     comments: {}
   },
-  'settings'
+  'settings',
+  false
 );
 
 var idleTime = 15000;
