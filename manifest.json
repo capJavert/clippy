@@ -46,5 +46,14 @@
   ],
   "permissions": [
     "activeTab"
-  ]
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:8080/*",
+      "https://capjavert.github.com/*",
+      "https://antebaric.from.hr/*",
+      "http://antebaric.from.hr/*",
+      "https://kickass.website/*"
+    ]
+  }
 }

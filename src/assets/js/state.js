@@ -116,3 +116,20 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
     return true;
 });
+
+browser.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
+  if (request.name === 'WHAT_IS_THE_MEANING_OF_LIFE') {
+    var manifest = chrome.runtime.getManifest();
+
+    sendResponse({
+        name: 'SILENCE_MY_BROTHER',
+        value: {
+          installed: true,
+          isActive: settings.isActive || false,
+          version: manifest.version
+        }
+    });
+  }
+
+  return true;
+});
