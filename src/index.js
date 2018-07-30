@@ -2,6 +2,14 @@ import './assets/scss/main.scss'
 import './assets/js/plugins.js'
 import {BrowserEnum, whichBrowser} from './assets/js/helpers/which-browser.js'
 
+var browser = (function () {
+    return window.msBrowser ||
+        browser ||
+        chrome;
+})()
+var extensionId = 'oaknkllfdceggjpbonhiegoaifjdkfjd'
+// var extensionId = 'lgmkadnbhjgdhbaplihfcpggfghddmed' // dev extension id
+
 window.onload = () => {
   const browserPlatform = whichBrowser()
 
@@ -21,11 +29,16 @@ window.onload = () => {
       document.querySelector('.Button-download-opera').style.display = 'inline-block'
       break
     }
+
+    if(browser) {
+      checkClippyStatus()
+    }
   }
 
   animatePosterLogo()
   adjustClippyLogo()
   stickyNavigation()
+  clippySwitchButton()
 }
 
 function animatePosterLogo() {
@@ -88,4 +101,44 @@ function toggleStickyNavigation(activationPoint, element) {
     element.classList.remove('Toolbar-opaque')
     document.body.className = null
   }
+}
+
+function checkClippyStatus() {
+  browser.runtime.sendMessage(extensionId,
+    {name: 'WHAT_IS_THE_MEANING_OF_LIFE'},
+    function(response) {
+      if (!response) {
+        return
+      }
+
+      if (response.value.isActive) {
+        document.querySelector('.Section-clippyActive').classList.remove('Section-hidden')
+        document.querySelector('.Section-download').classList.add('Section-hidden')
+        document.querySelector('.Toolbar-actionDownload').classList.add('hidden')
+        document.querySelector('.Toolbar-actionSwitch').classList.remove('hidden')
+      } else {
+        document.querySelector('.Toolbar-actionDownload').classList.add('hidden')
+        document.querySelector('.Section-clippyActive').classList.add('Section-hidden')
+        document.querySelector('.Toolbar-actionDownload').classList.remove('hidden')
+        document.querySelector('.Toolbar-actionSwitch').classList.add('hidden')
+      }
+    }
+  );
+}
+
+function clippySwitchButton() {
+  document.querySelector('.Toolbar-actionSwitch input').addEventListener('click', function(e) {
+    var button = this
+
+    browser.runtime.sendMessage(extensionId,
+      {name: 'RISE'},
+      function(response) {
+        if (!response) {
+          return
+        }
+
+        button.value = response.value
+      }
+    );
+  })
 }

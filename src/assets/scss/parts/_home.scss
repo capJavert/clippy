@@ -200,20 +200,37 @@ h2 {
   max-width: remc(980);
   padding: remc(80) remc(20);
   box-sizing: border-box;
-}
 
-.Section-download {
-  .Download-container {
-    margin: 0 auto;
-    text-align: center;
+  &-download {
+    .Download-container {
+      margin: 0 auto;
+      text-align: center;
 
-    .Button {
-      margin: 0 remc(10);
+      .Button {
+        margin: 0 remc(10);
+      }
+    }
+
+    .Help-text {
+      margin-top: remc(30);
     }
   }
 
-  .Help-text {
-    margin-top: remc(30);
+  &-clippyActive {
+    .fa-beer {
+      color: #efae34;
+      margin-left: remc(15);
+
+      &.inverted {
+        margin-left: 0;
+        margin-right: remc(15);
+        transform: scale(-1, 1);
+      }
+    }
+  }
+
+  &-hidden {
+    display: none;
   }
 }
 
@@ -263,6 +280,19 @@ $posterSize: 360;
     width: 100%;
     max-width: remc($posterSize);
     margin: remc(80) auto;
+  }
+}
+
+.Clippy {
+  &-active {
+    width: 100%;
+    text-align: center;
+    color: #2fef7f;
+    margin-bottom: remc(50);
+
+    &-big {
+      font-size: remc(180);
+    }
   }
 }
 

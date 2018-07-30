@@ -40,7 +40,11 @@
           </a>
 
           <div class="Toolbar-actions">
-            <a class="Button" href="#download">Download</a>
+            <a class="Button Toolbar-actionDownload" href="#download">Download</a>
+            <label title="Turn Clippy on/off" class="switch hidden Toolbar-actionSwitch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
           </div>
         </div>
       </aside>
@@ -70,6 +74,17 @@
 
         <p class="Text Text-center Text-small Help-text">
           For help installing on other browsers supporting web extensions check this <a target="_blank" href="https://github.com/capJavert/clippy#the-code">link</a>.
+        </p>
+      </section>
+
+      <section class="Section Section-hidden Section-clippyActive">
+        <i class="fa fa-check-circle Clippy-active Clippy-active-big"></i>
+
+        <p class="Text Text-center">
+          Thank you for installing and using Clippy Assistant extension.
+        </p>
+        <p class="Text Text-center">
+           <i class="fa fa-beer inverted"></i> Cheers <i class="fa fa-beer"></i>
         </p>
       </section>
 
