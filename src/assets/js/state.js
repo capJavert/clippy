@@ -61,15 +61,19 @@ var sendActive = function (tab) {
     );
 }
 
-browser.browserAction.onClicked.addListener(function() {
-    settings.isActive = !settings.isActive;
+var toggleClippy = function() {
+  settings.isActive = !settings.isActive;
 
-    browser.tabs.query({}, function(tabs) {
-        for (var index in tabs) {
-            sendActive(tabs[index]);
-            toggleIcon(tabs[index]);
-        }
-    });
+  browser.tabs.query({}, function(tabs) {
+      for (var index in tabs) {
+          sendActive(tabs[index]);
+          toggleIcon(tabs[index]);
+      }
+  });
+}
+
+browser.browserAction.onClicked.addListener(function() {
+  toggleClippy();
 });
 
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -118,17 +122,25 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 browser.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
-  if (request.name === 'WHAT_IS_THE_MEANING_OF_LIFE') {
-    var manifest = chrome.runtime.getManifest();
+  switch (request.name) {
+    case 'WHAT_IS_THE_MEANING_OF_LIFE':
+      var manifest = chrome.runtime.getManifest();
 
-    sendResponse({
-        name: 'SILENCE_MY_BROTHER',
-        value: {
-          installed: true,
-          isActive: settings.isActive || false,
-          version: manifest.version
-        }
-    });
+      sendResponse({
+          name: 'SILENCE_MY_BROTHER',
+          value: {
+            installed: true,
+            isActive: settings.isActive || false,
+            version: manifest.version
+          }
+      });
+      break
+    case 'RISE':
+      toggleClippy();
+      sendResponse({
+          name: 'SILENCE_MY_BROTHER',
+          value: settings.isActive || false
+      });
   }
 
   return true;
