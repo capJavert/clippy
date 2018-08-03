@@ -5,10 +5,11 @@ import {BrowserEnum, whichBrowser} from './assets/js/helpers/which-browser.js'
 var browser = (function () {
     return window.msBrowser ||
         browser ||
-        chrome;
+        chrome
 })()
 var extensionId = 'oaknkllfdceggjpbonhiegoaifjdkfjd'
 // var extensionId = 'lgmkadnbhjgdhbaplihfcpggfghddmed' // dev extension id
+var actionSwitchInput = document.querySelector('.Toolbar-actionSwitch input')
 
 window.onload = () => {
   const browserPlatform = whichBrowser()
@@ -111,25 +112,21 @@ function checkClippyStatus() {
         return
       }
 
-      if (response.value.isActive) {
-        document.querySelector('.Section-clippyActive').classList.remove('Section-hidden')
-        document.querySelector('.Section-download').classList.add('Section-hidden')
-        document.querySelector('.Toolbar-actionDownload').classList.add('hidden')
+      document.querySelector('.Section-clippyActive').classList.remove('Section-hidden')
+      document.querySelector('.Section-download').classList.add('Section-hidden')
+      document.querySelector('.Toolbar-actionDownload').classList.add('hidden')
+
+      if (!response.value.isActive) {
         document.querySelector('.Toolbar-actionSwitch').classList.remove('hidden')
-      } else {
-        document.querySelector('.Toolbar-actionDownload').classList.add('hidden')
-        document.querySelector('.Section-clippyActive').classList.add('Section-hidden')
-        document.querySelector('.Toolbar-actionDownload').classList.remove('hidden')
-        document.querySelector('.Toolbar-actionSwitch').classList.add('hidden')
       }
+
+      actionSwitchInput.checked = response.value.isActive
     }
-  );
+  )
 }
 
 function clippySwitchButton() {
-  document.querySelector('.Toolbar-actionSwitch input').addEventListener('click', function(e) {
-    var button = this
-
+  actionSwitchInput.addEventListener('click', function(e) {
     browser.runtime.sendMessage(extensionId,
       {name: 'RISE'},
       function(response) {
@@ -137,8 +134,8 @@ function clippySwitchButton() {
           return
         }
 
-        button.value = response.value
+        actionSwitchInput.checked = response.value
       }
-    );
+    )
   })
 }
