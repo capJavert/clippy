@@ -10,8 +10,10 @@ var browser = (function () {
 var extensionId = 'oaknkllfdceggjpbonhiegoaifjdkfjd'
 // var extensionId = 'lgmkadnbhjgdhbaplihfcpggfghddmed' // dev extension id
 var actionSwitchInput = document.querySelector('.Toolbar-actionSwitch input')
+var animationInterval = null
+var refreshInterval = null
 
-window.onload = () => {
+window.addEventListener('load', function() {
   const browserPlatform = whichBrowser()
 
   if ([BrowserEnum.chrome, BrowserEnum.firefox, BrowserEnum.opera].indexOf(browserPlatform) > -1) {
@@ -32,7 +34,9 @@ window.onload = () => {
     }
 
     if(browser) {
-      checkClippyStatus()
+      refreshInterval = setInterval(function() {
+        checkClippyStatus()
+      }, 1000)
     }
   }
 
@@ -40,7 +44,16 @@ window.onload = () => {
   adjustClippyLogo()
   stickyNavigation()
   clippySwitchButton()
-}
+})
+
+window.addEventListener('unload', function() {
+  if (refreshInterval != null) {
+    clearInterval(refreshInterval)
+  }
+  if (animationInterval != null) {
+    clearInterval(animationInterval)
+  }
+})
 
 function animatePosterLogo() {
   const svgDocument = document.querySelector('.PosterImage-object').contentDocument
@@ -52,7 +65,7 @@ function animatePosterLogo() {
     3: svgDocument.querySelector('.Gradient1-3')
   }
 
-  setInterval(function() {
+  animationInterval = setInterval(function() {
     const color = {
       1: [Math.floor(Math.random() * 30) + 48, Math.floor(Math.random() * 30) + 158, Math.floor(Math.random() * 10) + 242],
       2: [Math.floor(Math.random() * 30) + 47, Math.floor(Math.random() * 10) + 239, Math.floor(Math.random() * 20) + 117],
@@ -109,6 +122,12 @@ function checkClippyStatus() {
     {name: 'WHAT_IS_THE_MEANING_OF_LIFE'},
     function(response) {
       if (!response) {
+        removeClippy()
+        document.querySelector('.Section-clippyActive').classList.add('Section-hidden')
+        document.querySelector('.Section-download').classList.remove('Section-hidden')
+        document.querySelector('.Toolbar-actionDownload').classList.remove('hidden')
+        document.querySelector('.Toolbar-actionSwitch').classList.add('hidden')
+
         return
       }
 
@@ -138,4 +157,12 @@ function clippySwitchButton() {
       }
     )
   })
+}
+
+function removeClippy() {
+  var clippy = document.querySelector('.clippy')
+
+  if (clippy != null) {
+    document.body.removeChild(clippy)
+  }
 }
