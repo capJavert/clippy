@@ -4,7 +4,7 @@ import {BrowserEnum, whichBrowser} from './assets/js/helpers/which-browser.js'
 
 var browser = (function () {
     return window.msBrowser ||
-        browser ||
+        browser || safari ||
         chrome;
 })()
 var extensionId = 'oaknkllfdceggjpbonhiegoaifjdkfjd'
