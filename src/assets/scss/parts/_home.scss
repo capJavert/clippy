@@ -71,6 +71,7 @@ h2 {
   &-fixed {
     top: 0;
     position: fixed;
+    z-index: 101;
   }
 
   &-logo {
@@ -88,6 +89,7 @@ h2 {
   &-fixed {
     top: 0;
     position: fixed;
+    z-index: 101;
   }
 
   &-opaque {
@@ -155,6 +157,11 @@ h2 {
   font-size: remc(16);
   display: inline-block;
   transition: background 300ms;
+  margin-top: 25px !important;
+
+  &:first-child {
+    margin-top: 0 !important;
+  }
 
   &:hover {
     background: #0162af;
