@@ -15,10 +15,12 @@ var settings = new webStorageObject.LocalStorageObject(
 );
 
 var idleTime = 15000;
-var commentsRepoURL = 'https://raw.githubusercontent.com/capJavert/clippy-dictionary/master/clippy.json'
+var getCommentsRepoURL = function () {
+    return 'https://raw.githubusercontent.com/capJavert/clippy-dictionary/master/clippy.json?v=' + new Date().getTime()
+}
 var loadComments = function () {
     var xhttp = new XMLHttpRequest();
-    xhttp.open('GET', commentsRepoURL, true);
+    xhttp.open('GET', getCommentsRepoURL(), true);
 
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
