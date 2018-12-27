@@ -16,7 +16,7 @@ export function whichBrowser() {
     return BrowserEnum.firefox
   }
 
-  if(!!window.chrome && !!window.chrome.webstore) {
+  if(!!window.chrome) {
     return BrowserEnum.chrome
   }
 
@@ -28,7 +28,7 @@ export function whichBrowser() {
     return BrowserEnum.ie
   }
 
-  if(!isIE && !!window.StyleMedia) {
+  if(!!window.StyleMedia) {
     return BrowserEnum.edge
   }
 
