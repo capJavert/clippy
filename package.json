@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/capJavert/clippy/issues"
   },
-  "homepage": "https://github.com/capJavert/clippy#readme"
+  "homepage": "https://github.com/capJavert/clippy#readme",
+  "devDependencies": {
+    "web-ext": "^2.9.3"
+  }
 }
