@@ -1,9 +1,11 @@
 
 var browser = (function () {
+    if (createBrowser) {
+        return createBrowser()
+    }
     return window.msBrowser ||
         browser ||
-        chrome ||
-        createBrowser ? createBrowser(true) : undefined;
+        chrome;
 })();
 
 var settings = new webStorageObject.LocalStorageObject(
@@ -25,7 +27,8 @@ var loadComments = function () {
 
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
-           settings.comments = JSON.parse(xhttp.response);
+            var comments = JSON.parse(xhttp.response);
+            settings.comments = comments
 
             browser.tabs.query({}, function(tabs) {
                 for (var index in tabs) {
@@ -33,7 +36,7 @@ var loadComments = function () {
                         tabs[index].id,
                         {
                             name: 'comments',
-                            value: settings.comments
+                            value: comments
                         }
                     );
                 }
@@ -44,14 +47,16 @@ var loadComments = function () {
 }
 var toggleIcon = function (tab) {
     var iconName = 'src/assets/img/clippy-icon' + (settings.isActive ? '' : '-gray');
-    browser.browserAction.setIcon({
+
+    // TODO change tooltip icon
+    /* browser.browserAction.setIcon({
         path: {
             16: iconName + '-48x48.png',
             24: iconName + '-48x48.png',
             32: iconName + '-48x48.png'
         },
         tabId: tab.id
-    });
+    }); */
 }
 
 var sendActive = function (tab) {
@@ -124,7 +129,8 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     return true;
 });
 
-browser.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
+// TODO handle messages from the browser
+/* browser.runtime.onMessageExternal.addListener(function(request, sender, sendResponse) {
   switch (request.name) {
     case 'WHAT_IS_THE_MEANING_OF_LIFE':
       var manifest = chrome.runtime.getManifest();
@@ -147,4 +153,4 @@ browser.runtime.onMessageExternal.addListener(function(request, sender, sendResp
   }
 
   return true;
-});
+}); */

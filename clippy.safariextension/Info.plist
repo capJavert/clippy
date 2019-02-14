@@ -46,10 +46,10 @@
 		<dict>
 			<key>End</key>
 			<array>
+				<string>src/assets/js/browser.polyfill.js</string>
 				<string>src/assets/js/jquery.min.js</string>
 				<string>src/assets/js/clippy.js</string>
 				<string>src/assets/js/agent.js</string>
-				<string>src/assets/js/browser.polyfill.js</string>
 				<string>src/index.js</string>
 			</array>
 		</dict>

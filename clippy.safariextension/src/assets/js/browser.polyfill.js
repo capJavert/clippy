@@ -1,3 +1,8 @@
+/**
+ * Proxy methods from WebExtension API Tab object
+ * @param  {SafariBrowserTab} tab SafariBrowserTab object
+ * @return {Tab} object compatible with WebExtension API
+ */
 function tabProxy(tab) {
     return new Proxy(tab, {
         get: function(target, prop, receiver) {
@@ -10,11 +15,17 @@ function tabProxy(tab) {
     })
 }
 
+/**
+ * Create browser object
+ *
+ * @param  {[boolean]} injected If browser object will be used inside injected page
+ * @return {Browser} object compatible with WebExtension API
+ */
 function createBrowser(injected) {
     var polyfill = injected ? safari.self : safari.application
     var callbacks = {}
 
-    // add special message callback to provide polyfill
+    // adding special message callback to provide polyfill
     // for browser.runtime.sendMessage(message, callback)
     if (injected) {
         polyfill.addEventListener('message', function(event) {
@@ -28,7 +39,7 @@ function createBrowser(injected) {
 
     return {
         extension: {
-            getUrl: function(path) {
+            getURL: function(path) {
                 return safari.extension.baseURI + path
             }
         },

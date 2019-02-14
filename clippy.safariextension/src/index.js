@@ -1,9 +1,11 @@
 
 var browser = (function () {
+    if (createBrowser) {
+        return createBrowser(true)
+    }
     return window.msBrowser ||
         browser ||
-        chrome ||
-        createBrowser ? createBrowser(true) : undefined;
+        chrome;
 })();
 
 var clippyController = {
