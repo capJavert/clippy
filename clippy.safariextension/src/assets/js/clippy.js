@@ -1,7 +1,8 @@
 var browser = (function () {
     return window.msBrowser ||
         browser ||
-        chrome;
+        chrome ||
+        createBrowser ? createBrowser(true) : undefined;
 })();
 var clippy = {};
 
@@ -1017,4 +1018,3 @@ clippy.Queue.prototype = {
         this._progressQueue();
     }
 };
-

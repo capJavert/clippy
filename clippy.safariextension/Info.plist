@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>capJavert</string>
+	<key>Builder Version</key>
+	<string>14606.4.5</string>
+	<key>CFBundleDisplayName</key>
+	<string>Clippy Assistant</string>
+	<key>CFBundleIdentifier</key>
+	<string>website.kickass.clippy</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.7</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Database Quota</key>
+		<integer>5242880</integer>
+		<key>Global Page</key>
+		<string>index.html</string>
+		<key>Toolbar Items</key>
+		<array>
+			<dict>
+				<key>Command</key>
+				<string>toggle</string>
+				<key>Identifier</key>
+				<string>clippy</string>
+				<key>Image</key>
+				<string>src/assets/img/clippy-icon-48x48.png</string>
+				<key>Include By Default</key>
+				<true/>
+				<key>Label</key>
+				<string>Clippy Assistant</string>
+				<key>Tool Tip</key>
+				<string>Toggle on/off</string>
+			</dict>
+		</array>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>src/assets/js/jquery.min.js</string>
+				<string>src/assets/js/clippy.js</string>
+				<string>src/assets/js/agent.js</string>
+				<string>src/assets/js/browser.polyfill.js</string>
+				<string>src/index.js</string>
+			</array>
+		</dict>
+		<key>Stylesheets</key>
+		<array>
+			<string>src/assets/css/clippy.css</string>
+		</array>
+		<key>Whitelist</key>
+		<array>
+			<string>http://*/*</string>
+			<string>https://*/*</string>
+		</array>
+	</dict>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+	<key>Website</key>
+	<string>https://kickass.website/clippy</string>
+</dict>
+</plist>

@@ -2,7 +2,8 @@
 var browser = (function () {
     return window.msBrowser ||
         browser ||
-        chrome;
+        chrome ||
+        createBrowser ? createBrowser(true) : undefined;
 })();
 
 var settings = new webStorageObject.LocalStorageObject(
