@@ -6,7 +6,7 @@
     "build": "webpack --env.production --mode production",
     "serve": "webpack-dev-server --env.dev --mode development",
     "watch": "webpack --watch --env.dev --mode development",
-    "publish-gh-pages": "npm run build && node publish.js"
+    "publish": "npm run build && node publish.js"
   },
   "repository": {
     "type": "git",
