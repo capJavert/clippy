@@ -4,7 +4,7 @@
   "name": "Clippy",
   "short_name": "Clippy Assistant",
   "description": "Clippy MS Word Office assistant is now back to assist inside your browser!",
-  "version": "1.7",
+  "version": "1.8",
   "author": "Ante Barić (capJavert)",
   "icons": {
     "16": "src/assets/img/clippy-icon-16x16.png",
@@ -53,7 +53,8 @@
       "https://capjavert.github.com/*",
       "https://antebaric.from.hr/*",
       "http://antebaric.from.hr/*",
-      "https://kickass.website/*"
+      "https://kickass.website/*",
+      "https://clippy.kickass.website/*"
     ]
   }
 }
