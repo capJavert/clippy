@@ -37,7 +37,9 @@ window.addEventListener('load', function() {
     if(browser) {
       refreshInterval = setInterval(function() {
         checkClippyStatus()
-      }, 1000)
+      }, 5000)
+
+      checkClippyStatus()
     }
   }
 
@@ -123,7 +125,7 @@ function checkClippyStatus() {
     {name: 'WHAT_IS_THE_MEANING_OF_LIFE'},
     function(response) {
       if (!response) {
-        removeClippy()
+        // removeClippy()
         document.querySelector('.Section-clippyActive').classList.add('Section-hidden')
         document.querySelector('.Section-download').classList.remove('Section-hidden')
         document.querySelector('.Toolbar-actionDownload').classList.remove('hidden')
@@ -131,6 +133,8 @@ function checkClippyStatus() {
 
         return
       }
+
+      clearInterval(refreshInterval)
 
       document.querySelector('.Section-clippyActive').classList.remove('Section-hidden')
       document.querySelector('.Section-download').classList.add('Section-hidden')
