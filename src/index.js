@@ -8,15 +8,17 @@ var browser = (function () {
         window.safari ||
         window.chrome
 })()
-var extensionId = 'oaknkllfdceggjpbonhiegoaifjdkfjd'
-// var extensionId = 'lgmkadnbhjgdhbaplihfcpggfghddmed' // dev extension id
+const browserPlatform = whichBrowser()
+const extensionIds = {
+    [BrowserEnum.chrome]: 'oaknkllfdceggjpbonhiegoaifjdkfjd',
+    [BrowserEnum.opera]: 'mmpbggcbnfmpipfcfgpogialhdmpofgg'
+}
+var extensionId = extensionIds[browserPlatform]
 var actionSwitchInput = document.querySelector('.Toolbar-actionSwitch input')
 var animationInterval = null
 var refreshInterval = null
 
 window.addEventListener('load', function() {
-  const browserPlatform = whichBrowser()
-
   if ([BrowserEnum.chrome, BrowserEnum.firefox, BrowserEnum.opera].indexOf(browserPlatform) > -1) {
     document.querySelectorAll('.Button-download').forEach(element => {
       element.style.display = 'none'
@@ -119,6 +121,10 @@ function toggleStickyNavigation(activationPoint, element) {
 }
 
 function checkClippyStatus() {
+  if (!extensionId) {
+      return
+  }
+
   browser.runtime.sendMessage(extensionId,
     {name: 'WHAT_IS_THE_MEANING_OF_LIFE'},
     function(response) {
@@ -146,6 +152,10 @@ function checkClippyStatus() {
 }
 
 function clippySwitchButton() {
+  if (!extensionId) {
+      return
+  }
+
   actionSwitchInput.addEventListener('click', function(e) {
     browser.runtime.sendMessage(extensionId,
       {name: 'RISE'},
