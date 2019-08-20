@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "web-ext build --ignore-files package*.json src/assets/img/screenshots"
+    "build": "web-ext build --ignore-files .nvmrc .editorconfig .eslintrc package*.json src/assets/img/screenshots"
   },
   "repository": {
     "type": "git",
