@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/capJavert/clippy#readme",
   "devDependencies": {
+    "eslint": "^6.2.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
     "web-ext": "^2.9.3"
   }
 }
