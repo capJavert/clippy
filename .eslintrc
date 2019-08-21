@@ -8,11 +8,21 @@
     ],
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        "browser": true,
+        "chrome": "readonly",
+        "clippy": "readonly",
+        "webStorageObject": "readonly"
     },
     "parserOptions": {
         "ecmaVersion": 2018
     },
     "rules": {
+        "no-console": "off",
+        "global-require": "off",
+        "semi": "off",
+        "comma-dangle": "off",
+        "import/no-dynamic-require": "off",
+        "indent": ["error", 4]
     }
 }
