@@ -1,61 +1,61 @@
 {
-  "manifest_version": 2,
+    "manifest_version": 2,
 
-  "name": "Clippy",
-  "short_name": "Clippy Assistant",
-  "description": "Clippy MS Word Office assistant is now back to assist inside your browser!",
-  "version": "1.9.0",
-  "author": "Ante Barić (capJavert)",
-  "icons": {
-    "16": "src/assets/img/clippy-icon-16x16.png",
-    "48": "src/assets/img/clippy-icon-48x48.png",
-    "128": "src/assets/img/clippy-icon-128x128.png"
-  },
-  "browser_action": {
-    "default_title": "Clippy Assistant",
-    "default_icon": {
-      "16": "src/assets/img/clippy-icon-gray-48x48.png",
-      "24": "src/assets/img/clippy-icon-gray-48x48.png",
-      "32": "src/assets/img/clippy-icon-gray-48x48.png"
-    }
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "css": [
-        "src/assets/css/clippy.css"
-      ],
-      "js": [
-        "src/assets/js/jquery.min.js",
-        "src/assets/js/clippy.js",
-        "src/assets/js/agent.js",
-        "src/index.js"
-      ],
-      "run_at": "document_end"
-    }
-  ],
-  "background": {
-    "scripts": [
-      "src/assets/js/web-storage-object.js",
-      "src/assets/js/state.js"
+    "name": "Clippy",
+    "short_name": "Clippy Assistant",
+    "description": "Clippy MS Word Office assistant is now back to assist inside your browser!",
+    "version": "1.9.0",
+    "author": "Ante Barić (capJavert)",
+    "icons": {
+        "16": "src/assets/img/clippy-icon-16x16.png",
+        "48": "src/assets/img/clippy-icon-48x48.png",
+        "128": "src/assets/img/clippy-icon-128x128.png"
+    },
+    "browser_action": {
+        "default_title": "Clippy Assistant",
+        "default_icon": {
+            "16": "src/assets/img/clippy-icon-gray-48x48.png",
+            "24": "src/assets/img/clippy-icon-gray-48x48.png",
+            "32": "src/assets/img/clippy-icon-gray-48x48.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "css": [
+                "src/assets/css/clippy.css"
+            ],
+            "js": [
+                "src/assets/js/jquery.min.js",
+                "src/assets/js/clippy.js",
+                "src/assets/js/agent.js",
+                "src/index.js"
+            ],
+            "run_at": "document_end"
+        }
     ],
-    "persistent": true
-  },
-  "web_accessible_resources": [
-    "src/assets/img/clippy.map.png"
-  ],
-  "permissions": [
-    "activeTab",
-    "https://raw.githubusercontent.com/capJavert/clippy-dictionary/*"
-  ],
-  "externally_connectable": {
-    "matches": [
-      "http://localhost:8080/*",
-      "https://capjavert.github.com/*",
-      "https://antebaric.from.hr/*",
-      "http://antebaric.from.hr/*",
-      "https://kickass.website/*",
-      "https://clippy.kickass.website/*"
-    ]
-  }
+    "background": {
+        "scripts": [
+            "src/assets/js/web-storage-object.js",
+            "src/assets/js/state.js"
+        ],
+        "persistent": true
+    },
+    "web_accessible_resources": [
+        "src/assets/img/clippy.map.png"
+    ],
+    "permissions": [
+        "activeTab",
+        "https://raw.githubusercontent.com/capJavert/clippy-dictionary/*"
+    ],
+    "externally_connectable": {
+        "matches": [
+            "http://localhost:8080/*",
+            "https://capjavert.github.com/*",
+            "https://antebaric.from.hr/*",
+            "http://antebaric.from.hr/*",
+            "https://kickass.website/*",
+            "https://clippy.kickass.website/*"
+        ]
+    }
 }
