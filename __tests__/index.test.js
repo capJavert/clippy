@@ -92,6 +92,7 @@ it('should prefetch comments on init', () => {
     browser.runtime.sendMessage = (message) => {
         if (message.name === 'comments') {
             commentsMessage = message
+            browser.runtime.onMessage.listener({ name: 'comments', value: dictionary })
         }
     }
 
@@ -99,9 +100,6 @@ it('should prefetch comments on init', () => {
     clippyController.init(agent)
 
     expect(commentsMessage).toEqual({ name: 'comments' })
-
-    browser.runtime.onMessage.listener({ name: 'comments', value: dictionary })
-
     expect(clippyController.comments).toEqual(dictionary)
 })
 
@@ -158,4 +156,53 @@ test('animation trigger', () => {
     expect(clippyController.animations).toContain(agent.animation)
     expect(agent.animationLength).toEqual(5000)
     expect(agent.callback).toBeDefined()
+})
+
+test('isActive listener', () => {
+    expect.assertions(2)
+
+    const agent = createAgent()
+    clippyController.init(agent)
+
+    browser.runtime.onMessage.listener({ name: 'isActive', value: true })
+
+    expect(agent.isActive).toBe(true)
+
+    browser.runtime.onMessage.listener({ name: 'isActive', value: false })
+
+    expect(agent.isActive).toBe(false)
+})
+
+test('comments listener', () => {
+    const agent = createAgent()
+    clippyController.init(agent)
+
+    browser.runtime.onMessage.listener({ name: 'comments', value: dictionary })
+
+    expect(clippyController.comments).toEqual(dictionary)
+})
+
+test('animate listener', () => {
+    expect.assertions(2)
+
+    const agent = createAgent()
+    clippyController.init(agent)
+
+    browser.runtime.sendMessage = (message, callback) => {
+        if (message.name === 'isActive') {
+            callback({ value: false })
+        }
+    }
+    browser.runtime.onMessage.listener({ name: 'animate' })
+
+    expect(agent.animation).toBeUndefined()
+
+    browser.runtime.sendMessage = (message, callback) => {
+        if (message.name === 'isActive') {
+            callback({ value: true })
+        }
+    }
+    browser.runtime.onMessage.listener({ name: 'animate' })
+
+    expect(agent.animation).toBeDefined()
 })
