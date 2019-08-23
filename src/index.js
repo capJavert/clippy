@@ -116,3 +116,5 @@ browser.runtime.onMessage.addListener((request) => {
         break
     }
 })
+
+window.clippyController = clippyController
