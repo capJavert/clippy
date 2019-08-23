@@ -1,5 +1,4 @@
-
-browser = window.msBrowser || browser || chrome
+browser = window.msBrowser || window.browser || window.chrome
 
 const clippyController = {
     agent: null,
