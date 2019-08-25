@@ -30,5 +30,11 @@
         "hooks": {
             "pre-push": "npm run lint"
         }
+    },
+    "jest": {
+        "collectCoverageFrom" : [
+            "<rootDir>/src/index.js" ,
+            "<rootDir>/src/assets/js/state.js"
+        ]
     }
 }
