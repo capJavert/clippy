@@ -50,7 +50,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-    jest.resetModules();
+    jest.resetModules()
 })
 
 test('agent init', () => {

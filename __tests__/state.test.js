@@ -68,10 +68,11 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-    jest.resetModules();
+    jest.resetModules()
+    localStorage.removeItem('settings')
 })
 
-describe('State listener responds to messages', () => {
+describe('Responds to messages', () => {
     test('isActive listener', () => {
         expect.assertions(2)
 
@@ -170,5 +171,40 @@ describe('Toolbar controls are working', () => {
         }
 
         browser.browserAction.onClicked.listener()
+    })
+})
+
+describe('Responds to external messages', () => {
+    test('connect listener', () => {
+        window.settings.isActive = true
+
+        browser.runtime.onMessageExternal.listener({ name: 'WHAT_IS_THE_MEANING_OF_LIFE' }, {}, (response) => {
+            expect(response).toEqual({
+                name: 'SILENCE_MY_BROTHER',
+                value: {
+                    installed: true,
+                    isActive: true,
+                    version: 2
+                }
+            })
+        })
+    })
+
+    test('toggle listener', () => {
+        window.settings.isActive = true
+
+        browser.runtime.onMessageExternal.listener({ name: 'RISE' }, {}, (response) => {
+            expect(response).toEqual({
+                name: 'SILENCE_MY_BROTHER',
+                value: false
+            })
+        })
+
+        browser.runtime.onMessageExternal.listener({ name: 'RISE' }, {}, (response) => {
+            expect(response).toEqual({
+                name: 'SILENCE_MY_BROTHER',
+                value: true
+            })
+        })
     })
 })
