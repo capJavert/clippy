@@ -143,3 +143,5 @@ browser.runtime.onMessageExternal.addListener((request, sender, sendResponse) =>
 
     return true
 })
+
+window.settings = settings
