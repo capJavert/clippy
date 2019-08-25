@@ -1,122 +1,120 @@
+browser = window.msBrowser || window.browser || window.chrome
 
-var browser = (function () {
-    return window.msBrowser ||
-        browser ||
-        chrome;
-})();
-
-var clippyController = {
+const clippyController = {
     agent: null,
     lastComment: null,
     animations: ['Congratulate', 'LookRight', 'SendMail', 'Thinking', 'Explain', 'IdleRopePile', 'IdleAtom', 'Print', 'GetAttention', 'Save', 'GetTechy', 'GestureUp', 'Idle1_1', 'Processing', 'Alert', 'LookUpRight', 'IdleSideToSide', 'LookLeft', 'IdleHeadScratch', 'LookUpLeft', 'CheckingSomething', 'Hearing_1', 'GetWizardy', 'IdleFingerTap', 'GestureLeft', 'Wave', 'GestureRight', 'Writing', 'IdleSnooze', 'LookDownRight', 'GetArtsy', 'LookDown', 'Searching', 'EmptyTrash', 'LookUp', 'GestureDown', 'RestPose', 'IdleEyeBrowRaise', 'LookDownLeft'],
     comments: {},
-    init: function(agent) {
-        this.agent = agent;
-        this.fetchCommentUpdates();
+    init(agent) {
+        this.agent = agent
+        this.fetchCommentUpdates()
 
-        browser.runtime.sendMessage({name: 'isActive'}, function(response) {
+        browser.runtime.sendMessage({ name: 'isActive' }, (response) => {
             if (response.value) {
-                clippyController.toggle(response.value);
-                clippyController.idle();
+                clippyController.toggle(response.value)
+                clippyController.idle()
             }
-        });
+        })
     },
-    talk: function () {
-        var hostname = window.location.hostname;
-        var clippyComments = [];
+    talk() {
+        const { hostname } = window.location
+        let clippyComments = []
 
-        for (var property in this.comments) {
-            if (this.comments.hasOwnProperty(property)) {
-                if (hostname.indexOf(property) !== -1) {
-                    if (this.comments[property].constructor === Array) {
-                        clippyComments = clippyComments.concat(this.comments[property]);
-                    } else {
-                        clippyComments.push(this.comments[property]);
-                    }
+        Object.keys(this.comments).forEach((property) => {
+            if (hostname.indexOf(property) !== -1) {
+                if (this.comments[property].constructor === Array) {
+                    clippyComments = clippyComments.concat(this.comments[property])
+                } else {
+                    clippyComments.push(this.comments[property])
                 }
             }
-        }
+        })
 
         if (clippyComments.length > 0) {
-            var nextComment = null;
-            if (clippyComments.constructor === Array) {
-                nextComment = clippyComments[Math.floor(Math.random()*clippyComments.length)];
-            } else {
-                nextComment = clippyComments;
-            }
+            const nextComment = clippyComments.constructor === Array
+                ? clippyComments[Math.floor(Math.random() * clippyComments.length)]
+                : clippyComments
 
             if (nextComment !== this.lastComment) {
-                this.agent.speak(nextComment);
-                this.lastComment = nextComment;
+                this.agent.speak(nextComment)
+                this.lastComment = nextComment
             } else {
-                this.lastComment = null;
+                this.lastComment = null
             }
         } else {
-            this.agent.stop();
+            this.agent.stop()
         }
     },
-    toggle: function (state) {
-        var clippyBalloon = document.getElementsByClassName('clippy-balloon');
+    toggle(state) {
+        const clippyBalloon = document.getElementsByClassName('clippy-balloon')
 
         if (clippyBalloon.length > 0) {
-            clippyBalloon[0].style.display = state && clippyBalloon[0].innerText.length > 0 ? 'block' : 'none';
+            clippyBalloon[0].style.display = state && clippyBalloon[0].innerText.length > 0 ? 'block' : 'none'
         }
 
-        this.agent.stop();
+        this.agent.stop()
 
         if (!state) {
-            this.agent.play('GoodBye', 5000, function () {
-                clippyController.agent.hide(true);
-            });
+            this.agent.play('GoodBye', 5000, () => {
+                clippyController.agent.hide(true)
+            })
         } else {
-            clippyController.agent.show(true);
+            clippyController.agent.show(true)
         }
     },
-    fetchCommentUpdates: function () {
-        browser.runtime.sendMessage({name: 'comments'});
+    fetchCommentUpdates() {
+        browser.runtime.sendMessage({ name: 'comments' })
     },
-    idle: function () {
-        browser.runtime.sendMessage({name: 'idle'});
+    idle() {
+        browser.runtime.sendMessage({ name: 'idle' })
     },
-    animate: function (callback) {
-        this.agent.play(this.animations[Math.floor(Math.random()*this.animations.length)], 5000, callback);
+    animate(callback) {
+        this.agent.play(
+            this.animations[Math.floor(Math.random() * this.animations.length)],
+            5000,
+            callback
+        )
     }
-};
+}
 
-window.addEventListener('load', function () {
-    clippy.load('Clippy', function(agent){
-        clippyController.init(agent);
-    });
+window.addEventListener('load', () => {
+    clippy.load('Clippy', (agent) => {
+        clippyController.init(agent)
+    })
 }, false)
 
-browser.runtime.onMessage.addListener(function(request) {
+browser.runtime.onMessage.addListener((request) => {
     switch (request.name) {
-        case 'isActive':
-            clippyController.toggle(request.value);
+    case 'isActive':
+        clippyController.toggle(request.value)
 
-            if (request.value) {
-                clippyController.idle();
+        if (request.value) {
+            clippyController.idle()
+        }
+        break
+    case 'comments':
+        clippyController.comments = request.value
+        break
+    case 'animate':
+        if (!clippyController.agent) {
+            return
+        }
+
+        clippyController.fetchCommentUpdates()
+
+        browser.runtime.sendMessage({ name: 'isActive' }, (response) => {
+            if (response.value) {
+                clippyController.agent.stop()
+                clippyController.talk()
+                clippyController.animate(() => {
+                    clippyController.idle()
+                })
             }
-            break;
-        case 'comments':
-            clippyController.comments = request.value;
-            break;
-        case 'animate':
-            if(!clippyController.agent) {
-              return;
-            }
-
-            clippyController.fetchCommentUpdates();
-
-            browser.runtime.sendMessage({name: 'isActive'}, function(response) {
-                if (response.value) {
-                    clippyController.agent.stop();
-                    clippyController.talk();
-                    clippyController.animate(function () {
-                        clippyController.idle();
-                    });
-                }
-            });
-            break;
+        })
+        break
+    default:
+        break
     }
-});
+})
+
+window.clippyController = clippyController

@@ -1017,4 +1017,3 @@ clippy.Queue.prototype = {
         this._progressQueue();
     }
 };
-

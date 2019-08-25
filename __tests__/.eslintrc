@@ -1,0 +1,11 @@
+{
+    "extends": "../.eslintrc",
+    "globals": {
+        "jest": true,
+        "clippyController": "readonly"
+    },
+    "rules": {
+        "no-debugger": "off",
+        "no-console": "off"
+    }
+}
