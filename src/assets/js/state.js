@@ -125,7 +125,7 @@ browser.runtime.onMessageExternal.addListener((request, sender, sendResponse) =>
             name: 'SILENCE_MY_BROTHER',
             value: {
                 installed: true,
-                isActive: settings.isActive || false,
+                isActive: settings.isActive,
                 version: manifest.version
             }
         })
@@ -134,7 +134,7 @@ browser.runtime.onMessageExternal.addListener((request, sender, sendResponse) =>
         toggleClippy()
         sendResponse({
             name: 'SILENCE_MY_BROTHER',
-            value: settings.isActive || false
+            value: settings.isActive
         })
         break
     default:
