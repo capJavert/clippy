@@ -4,7 +4,7 @@
     "description": "Clippy MS Word Office asistant is now back to help inside your browser!",
     "main": "src/index.js",
     "scripts": {
-        "test": "jest",
+        "test": "jest --verbose",
         "build": "web-ext build --ignore-files .nvmrc .editorconfig .eslintrc package*.json src/assets/img/screenshots",
         "lint": "eslint --max-warnings=0 src"
     },
