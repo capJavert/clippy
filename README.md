@@ -1,4 +1,9 @@
 # Clippy
+
+![Chrome Web Store](https://img.shields.io/chrome-web-store/v/oaknkllfdceggjpbonhiegoaifjdkfjd)
+![Mozilla Add-on](https://img.shields.io/amo/v/clippy-assistant)
+[![Coverage Status](https://coveralls.io/repos/github/capJavert/clippy/badge.svg)](https://coveralls.io/github/capJavert/clippy)
+
 Clippy MS Word Office asistant is now back to assist inside your browser!
 
 ![alt text](https://github.com/capJavert/clippy/raw/master/src/assets/img/screenshots/clippy-google.jpg "Clippy in action!")
