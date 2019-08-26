@@ -5,6 +5,8 @@
     "main": "src/index.js",
     "scripts": {
         "test": "jest --verbose",
+        "test:coverage": "jest --collect-coverage",
+        "test:upload-coverage": "jest --verbose --coverage --coverageReporters=text-lcov | coveralls",
         "build": "web-ext build --ignore-files .nvmrc .editorconfig .eslintrc package*.json src/assets/img/screenshots",
         "lint": "eslint --max-warnings=0 src"
     },
@@ -19,12 +21,13 @@
     },
     "homepage": "https://github.com/capJavert/clippy#readme",
     "devDependencies": {
+        "coveralls": "^3.0.6",
         "eslint": "^6.2.1",
         "eslint-config-airbnb-base": "^14.0.0",
         "eslint-plugin-import": "^2.18.2",
         "husky": "^3.0.4",
         "jest": "^24.9.0",
-        "web-ext": "^2.9.3"
+        "web-ext": "^3.1.1"
     },
     "husky": {
         "hooks": {
@@ -32,8 +35,8 @@
         }
     },
     "jest": {
-        "collectCoverageFrom" : [
-            "<rootDir>/src/index.js" ,
+        "collectCoverageFrom": [
+            "<rootDir>/src/index.js",
             "<rootDir>/src/assets/js/state.js"
         ]
     }

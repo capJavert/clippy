@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "v10.3.0"
+
+install: npm install
+script:
+    - CI=true npm run lint
+    - CI=true npm run test:upload-coverage
+
+branches:
+    except:
+        - gh-pages
+        - website
