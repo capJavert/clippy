@@ -1,4 +1,11 @@
-browser = window.msBrowser || window.browser || window.chrome
+/* eslint-disable no-var */
+var browser = (function createBrowser() {
+    return window.msBrowser
+    || browser
+    || window.browser
+    || window.chrome
+}())
+/* eslint-enable no-var */
 
 const settings = new webStorageObject.LocalStorageObject(
     {
