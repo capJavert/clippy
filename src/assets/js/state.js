@@ -1,4 +1,6 @@
-browser = window.msBrowser || window.browser || window.chrome
+if (!browser) {
+    browser = window.msBrowser || window.chrome
+}
 
 const settings = new webStorageObject.LocalStorageObject(
     {

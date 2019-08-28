@@ -1,4 +1,6 @@
-browser = window.msBrowser || window.browser || window.chrome
+if (!browser) {
+    browser = window.msBrowser || window.chrome
+}
 
 const clippyController = {
     agent: null,
@@ -116,5 +118,9 @@ browser.runtime.onMessage.addListener((request) => {
         break
     }
 })
+
+// window.addEventListener('message', (event) => {
+//     console.log('message', event)
+// }, false)
 
 window.clippyController = clippyController

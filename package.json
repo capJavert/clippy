@@ -7,7 +7,7 @@
         "test": "jest --verbose",
         "test:coverage": "jest --collect-coverage",
         "test:upload-coverage": "jest --verbose --coverage --coverageReporters=text-lcov | coveralls",
-        "build": "web-ext build --ignore-files .nvmrc .editorconfig .eslintrc package*.json src/assets/img/screenshots",
+        "build": "web-ext build --ignore-files __tests__ coverage README.md package*.json src/assets/img/screenshots",
         "lint": "eslint --max-warnings=0 src"
     },
     "repository": {
