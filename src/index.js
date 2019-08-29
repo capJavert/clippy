@@ -144,7 +144,7 @@ function checkClippyStatus() {
         return
     }
 
-    if (browserPlatform === BrowserEnum.firefox || !browser) {
+    if (!browser) {
         window.postMessage({name: 'WHAT_IS_THE_MEANING_OF_LIFE'})
     } else {
         browser.runtime.sendMessage(extensionId,
@@ -168,7 +168,7 @@ function clippySwitchButton() {
     }
 
     actionSwitchInput.addEventListener('click', function(e) {
-        if (browserPlatform === BrowserEnum.firefox || !browser) {
+        if (!browser) {
             window.postMessage({name: 'RISE'})
         } else {
             browser.runtime.sendMessage(extensionId,
@@ -193,19 +193,21 @@ function removeClippy() {
     }
 }
 
-window.addEventListener('message', function(e) {
-    const response = e.data
+if (!browser) {
+    window.addEventListener('message', function(e) {
+        const response = e.data
 
-    if (response) {
-        switch(response.name) {
-        case 'SILENCE_MY_BROTHER':
-            handleInstallResponse(response)
-            break
-        case 'MOTHER_HEARS':
-            actionSwitchInput.checked = response.value
-            break
-        default:
-            break
+        if (response) {
+            switch(response.name) {
+            case 'SILENCE_MY_BROTHER':
+                handleInstallResponse(response)
+                break
+            case 'MOTHER_HEARS':
+                actionSwitchInput.checked = response.value
+                break
+            default:
+                break
+            }
         }
-    }
-})
+    })
+}
