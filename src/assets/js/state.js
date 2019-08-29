@@ -117,6 +117,13 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
             }, idleTime)
         }
         break
+    case 'toggle':
+        toggleClippy()
+        sendResponse({
+            name: 'SILENCE_MY_BROTHER',
+            value: settings.isActive
+        })
+        break
     default:
         break
     }

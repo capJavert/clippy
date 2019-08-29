@@ -124,8 +124,37 @@ browser.runtime.onMessage.addListener((request) => {
     }
 })
 
-// window.addEventListener('message', (event) => {
-//     console.log('message', event)
-// }, false)
+const isFirefox = typeof InstallTrigger !== 'undefined'
+
+if (isFirefox) {
+    window.addEventListener('message', (event) => {
+        const request = event.data || {}
+        const manifest = browser.runtime.getManifest()
+
+        browser.runtime.sendMessage({ name: 'isActive' }, (response) => {
+            switch (request.name) {
+            case 'WHAT_IS_THE_MEANING_OF_LIFE':
+                window.postMessage({
+                    name: 'SILENCE_MY_BROTHER',
+                    value: {
+                        installed: true,
+                        isActive: response.value,
+                        version: manifest.version
+                    }
+                })
+                break
+            case 'RISE':
+                browser.runtime.sendMessage({ name: 'toggle' }, (toggleResponse) => {
+                    window.postMessage(toggleResponse)
+                })
+                break
+            default:
+                break
+            }
+        })
+
+        return true
+    }, false)
+}
 
 window.clippyController = clippyController
