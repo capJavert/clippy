@@ -6,7 +6,7 @@
     "build": "webpack --env.production --mode production",
     "serve": "webpack-dev-server --env.dev --mode development",
     "watch": "webpack --watch --env.dev --mode development",
-    "publish": "npm run build && node publish.js"
+    "deploy": "now --target production"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,6 @@
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
     "file-loader": "^1.1.11",
-    "gh-pages": "^1.2.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.1",
