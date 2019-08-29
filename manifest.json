@@ -55,7 +55,8 @@
             "https://antebaric.from.hr/*",
             "http://antebaric.from.hr/*",
             "https://kickass.website/*",
-            "https://clippy.kickass.website/*"
+            "https://clippy.kickass.website/*",
+            "https://clippy.capjavert.now.sh/*"
         ]
     }
 }
