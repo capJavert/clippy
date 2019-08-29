@@ -24,7 +24,8 @@ const loadComments = () => {
 
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
-            settings.comments = JSON.parse(xhttp.response)
+            const comments = JSON.parse(xhttp.response)
+            settings.comments = comments
 
             browser.tabs.query({}, (tabs) => {
                 tabs.forEach((tab, index) => {
@@ -32,7 +33,7 @@ const loadComments = () => {
                         tabs[index].id,
                         {
                             name: 'comments',
-                            value: settings.comments
+                            value: comments
                         }
                     )
                 })
