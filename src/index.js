@@ -10,7 +10,7 @@ var browser = (function () {
 })()
 const browserPlatform = whichBrowser()
 const extensionIds = {
-    [BrowserEnum.chrome]: 'edpklkapgolmeafkkmmohgbjppajgocg',
+    [BrowserEnum.chrome]: 'oaknkllfdceggjpbonhiegoaifjdkfjd',
     [BrowserEnum.opera]: 'mmpbggcbnfmpipfcfgpogialhdmpofgg',
     [BrowserEnum.firefox]: 'tby4cia5oufpcc3hqtasqxdh7ine3a2a'
 }
