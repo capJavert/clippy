@@ -4,6 +4,7 @@ node_js:
 
 install: npm install
 script:
+    - CI=true npm run build:js
     - CI=true npm run lint
     - CI=true npm run test:upload-coverage
 

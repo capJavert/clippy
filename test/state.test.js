@@ -1,4 +1,4 @@
-window.webStorageObject = require('../src/assets/js/web-storage-object')
+window.webStorageObject = require('../assets/js/web-storage-object')
 
 const tabs = [
     {
@@ -13,7 +13,7 @@ const tabs = [
 ]
 
 const createBrowser = () => {
-    browser = {
+    window.browser = {
         runtime: {
             onMessage: {
                 addListener(listener) {
@@ -64,7 +64,7 @@ const dictionary = {
 
 beforeEach(() => {
     createBrowser()
-    require('../src/assets/js/state')
+    require('../src/state')
 })
 
 afterEach(() => {

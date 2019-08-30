@@ -493,7 +493,7 @@ clippy.Animator.prototype = {
         var frameSize = this._data.framesize;
         el.css('display', "none");
         el.css({width:frameSize[0], height:frameSize[1]});
-        el.css('background', "url('" + browser.extension.getURL('src/assets/img/clippy.map.png') + "') no-repeat");
+        el.css('background', "url('" + browser.extension.getURL('assets/img/clippy.map.png') + "') no-repeat");
 
         return el;
     },
@@ -884,7 +884,7 @@ clippy.load._loadMap = function (path) {
     // set dfd if not defined
     dfd = clippy.load._maps[path] = $.Deferred();
 
-    var src = browser.extension.getURL('src/assets/img/clippy.map.png');
+    var src = browser.extension.getURL('assets/img/clippy.map.png');
     var img = new Image();
 
     img.onload = dfd.resolve;
@@ -912,7 +912,7 @@ clippy.load._loadSounds = function (name, path) {
     if (!canPlayMp3 && !canPlayOgg) {
         dfd.resolve({});
     } else {
-        var src = browser.extension.getURL('src/assets/js' + (canPlayMp3 ? '/sounds-mp3.js' : '/sounds-ogg.js'));
+        var src = browser.extension.getURL('assets/js' + (canPlayMp3 ? '/sounds-mp3.js' : '/sounds-ogg.js'));
         // load
         clippy.load._loadScript(src);
     }*/
@@ -930,7 +930,7 @@ clippy.load._loadAgent = function (name, path) {
 
     dfd = clippy.load._getAgentDfd(name);
 
-    var src = browser.extension.getURL('src/assets/js/agent.js');
+    var src = browser.extension.getURL('assets/js/agent.js');
 
     clippy.load._loadScript(src);
 

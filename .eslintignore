@@ -1,4 +1,3 @@
-src/assets/js/agent.js
-src/assets/js/clippy.js
-src/assets/js/jquery.min.js
-src/assets/js/web-storage-object.js
+assets
+lib
+webpack.config.js

@@ -7,7 +7,7 @@
 
 Clippy MS Word Office asistant is now back to assist inside your browser!
 
-![alt text](https://github.com/capJavert/clippy/raw/master/src/assets/img/screenshots/clippy-google.jpg "Clippy in action!")
+![alt text](https://github.com/capJavert/clippy/raw/master/assets/img/screenshots/clippy-google.jpg "Clippy in action!")
 
 ## Features
 - Adds Clippy assistant to every page

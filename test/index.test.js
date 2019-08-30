@@ -1,5 +1,5 @@
 const createBrowser = () => {
-    browser = {
+    window.browser = {
         runtime: {
             sendMessage() {},
             onMessage: {

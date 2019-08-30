@@ -43,7 +43,7 @@ const loadComments = () => {
     xhttp.send()
 }
 const toggleIcon = (tab) => {
-    const iconName = `src/assets/img/clippy-icon${settings.isActive ? '' : '-gray'}`
+    const iconName = `assets/img/clippy-icon${settings.isActive ? '' : '-gray'}`
     browser.browserAction.setIcon({
         path: {
             16: `${iconName}-48x48.png`,
