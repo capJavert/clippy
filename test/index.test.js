@@ -1,5 +1,5 @@
 const createBrowser = () => {
-    browser = {
+    window.browser = {
         runtime: {
             sendMessage() {},
             onMessage: {
@@ -46,7 +46,7 @@ const createAgent = () => ({
 
 beforeEach(() => {
     createBrowser()
-    require('../src/index')
+    require('../lib/index')
 })
 
 afterEach(() => {

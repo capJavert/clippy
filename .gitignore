@@ -61,3 +61,6 @@ package-lock.json
 .DS_Store
 *.zip
 web-ext-artifacts
+
+# output folder
+lib
