@@ -9,6 +9,8 @@
         "test:upload-coverage": "jest --verbose --coverage --coverageReporters=text-lcov | coveralls",
         "build": "npm run build:js && web-ext build --ignore-files test coverage README.md package*.json assets/img/screenshots src",
         "build:js": "rimraf lib && babel src --out-dir lib",
+        "watch": "rimraf lib  && babel --watch src --out-dir lib",
+        "extension": "web-ext run --ignore-files test coverage README.md package*.json assets/img/screenshots src",
         "lint": "eslint --max-warnings=0 src"
     },
     "repository": {
