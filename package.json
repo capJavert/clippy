@@ -8,7 +8,7 @@
         "test:coverage": "jest --collect-coverage",
         "test:upload-coverage": "jest --verbose --coverage --coverageReporters=text-lcov | coveralls",
         "build": "npm run build:js && web-ext build --ignore-files test coverage README.md package*.json assets/img/screenshots src",
-        "build:js": "rm-cli -r lib && babel src --out-dir lib",
+        "build:js": "rimraf lib && babel src --out-dir lib",
         "lint": "eslint --max-warnings=0 src"
     },
     "repository": {
@@ -25,14 +25,13 @@
         "@babel/cli": "^7.5.5",
         "@babel/core": "^7.5.5",
         "@babel/preset-env": "^7.5.5",
-        "bluebird": "^3.5.5",
         "coveralls": "^3.0.6",
         "eslint": "^6.2.1",
         "eslint-config-airbnb-base": "^14.0.0",
         "eslint-plugin-import": "^2.18.2",
         "husky": "^3.0.4",
         "jest": "^24.9.0",
-        "rm-cli": "^1.4.2",
+        "rimraf": "^3.0.0",
         "web-ext": "^3.1.1"
     },
     "husky": {
