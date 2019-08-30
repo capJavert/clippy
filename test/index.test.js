@@ -46,7 +46,7 @@ const createAgent = () => ({
 
 beforeEach(() => {
     createBrowser()
-    require('../lib/index')
+    require('../src/index')
 })
 
 afterEach(() => {

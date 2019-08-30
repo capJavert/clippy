@@ -64,7 +64,7 @@ const dictionary = {
 
 beforeEach(() => {
     createBrowser()
-    require('../lib/state')
+    require('../src/state')
 })
 
 afterEach(() => {
