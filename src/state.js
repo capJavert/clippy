@@ -17,7 +17,7 @@ const settings = new webStorageObject.LocalStorageObject(
 )
 
 const idleTime = 15000
-const getCommentsRepoURL = () => `https://raw.githubusercontent.com/capJavert/clippy-dictionary/master/clippy.json?v=${new Date().getTime()}`
+const getCommentsRepoURL = () => `https://clippy-dictionary.kickass.website/?v=${new Date().getTime()}`
 const loadComments = () => {
     const xhttp = new XMLHttpRequest()
     xhttp.open('GET', getCommentsRepoURL(), true)
