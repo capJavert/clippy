@@ -45,7 +45,7 @@
     ],
     "permissions": [
         "activeTab",
-        "https://raw.githubusercontent.com/capJavert/clippy-dictionary/*"
+        "https://clippy-dictionary.kickass.website/*"
     ],
     "externally_connectable": {
         "matches": [
