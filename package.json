@@ -47,5 +47,8 @@
             "<rootDir>/src/index.js",
             "<rootDir>/src/state.js"
         ]
+    },
+    "volta": {
+        "node": "16.13.2"
     }
 }
