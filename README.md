@@ -5,6 +5,8 @@
 [![Build Status](https://travis-ci.org/capJavert/clippy.svg?branch=master)](https://travis-ci.org/capJavert/clippy)
 [![Coverage Status](https://coveralls.io/repos/github/capJavert/clippy/badge.svg)](https://coveralls.io/github/capJavert/clippy)
 
+[🇭🇷 Started in Croatia](https://startedincroatia.com)
+
 Clippy MS Word Office asistant is now back to assist inside your browser!
 
 ![alt text](https://github.com/capJavert/clippy/raw/master/assets/img/screenshots/clippy-google.jpg "Clippy in action!")
