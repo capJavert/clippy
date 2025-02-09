@@ -1,9 +1,14 @@
 /* eslint-disable no-var */
 var browser = (function createBrowser() {
-    return window.msBrowser
-    || browser
-    || window.browser
-    || window.chrome
+    if (typeof chrome !== 'undefined') {
+        return chrome
+    }
+
+    if (typeof browser !== 'undefined') {
+        return browser
+    }
+
+    throw new Error('No browser found')
 }())
 /* eslint-enable no-var */
 
@@ -156,5 +161,3 @@ if (isFirefox) {
         return true
     }, false)
 }
-
-window.clippyController = clippyController

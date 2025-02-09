@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Clippy",
     "short_name": "Clippy Assistant",
     "description": "Clippy MS Word Office assistant is now back to assist inside your browser!",
@@ -10,7 +10,7 @@
         "48": "assets/img/clippy-icon-48x48.png",
         "128": "assets/img/clippy-icon-128x128.png"
     },
-    "browser_action": {
+    "action": {
         "default_title": "Clippy Assistant",
         "default_icon": {
             "16": "assets/img/clippy-icon-gray-48x48.png",
@@ -20,7 +20,9 @@
     },
     "content_scripts": [
         {
-            "matches": ["<all_urls>"],
+            "matches": [
+                "<all_urls>"
+            ],
             "css": [
                 "assets/css/clippy.css"
             ],
@@ -30,22 +32,30 @@
                 "assets/js/agent.js",
                 "lib/index.js"
             ],
-            "run_at": "document_end"
+            "run_at": "document_end",
+            "all_frames": false
         }
     ],
     "background": {
-        "scripts": [
-            "assets/js/web-storage-object.js",
-            "lib/state.js"
-        ],
-        "persistent": true
+        "service_worker": "lib/state.js",
+        "type": "module"
     },
     "web_accessible_resources": [
-        "assets/img/clippy.map.png"
+        {
+            "resources": [
+                "assets/img/clippy.map.png"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
     ],
     "permissions": [
         "activeTab",
-        "https://clippy-dictionary.kickass.website/*"
+        "storage"
+    ],
+    "host_permissions": [
+        "<all_urls>"
     ],
     "externally_connectable": {
         "matches": [
