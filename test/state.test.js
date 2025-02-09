@@ -1,4 +1,6 @@
-window.webStorageObject = require('../assets/js/web-storage-object')
+/**
+ * @jest-environment jsdom
+ */
 
 const tabs = [
     {
@@ -13,7 +15,12 @@ const tabs = [
 ]
 
 const createBrowser = () => {
-    window.browser = {
+    const state = {
+        storage: {}
+    }
+    const listeners = []
+
+    global.browser = {
         runtime: {
             onMessage: {
                 addListener(listener) {
@@ -27,8 +34,11 @@ const createBrowser = () => {
             },
             getManifest() {
                 return {
-                    version: 2
+                    version: 3
                 }
+            },
+            getURL(path) {
+                return `chrome-extension://clippy${path}`
             }
         },
         tabs: {
@@ -41,11 +51,37 @@ const createBrowser = () => {
                 callback([...tabs])
             },
         },
-        browserAction: {
+        action: {
             setIcon() {},
             onClicked: {
                 addListener(listener) {
                     this.listener = listener
+                }
+            }
+        },
+        storage: {
+            local: {
+                async get() {
+                    return state.storage
+                },
+                async set(newStorage) {
+                    state.storage = {
+                        ...state.storage,
+                        ...newStorage
+                    }
+
+                    listeners.forEach((listener) => {
+                        listener(Object.entries(newStorage).reduce((acc, [key, value]) => {
+                            acc[key] = { newValue: value }
+
+                            return acc
+                        }, {}), 'local')
+                    })
+                },
+            },
+            onChanged: {
+                addListener(callback) {
+                    listeners.push(callback)
                 }
             }
         }
@@ -69,11 +105,12 @@ beforeEach(() => {
 
 afterEach(() => {
     jest.resetModules()
-    localStorage.removeItem('settings')
 })
 
 describe('Responds to messages', () => {
-    test('isActive listener', () => {
+    test('isActive listener', async () => {
+        await global.initPromise
+
         expect.assertions(2)
 
         browser.runtime.onMessage.listener({ name: 'isActive' }, {}, (response) => {
@@ -83,7 +120,9 @@ describe('Responds to messages', () => {
             })
         })
 
-        window.settings.isActive = false
+        await browser.storage.local.set({
+            isActive: false
+        })
 
         browser.runtime.onMessage.listener({ name: 'isActive' }, {}, (response) => {
             expect(response).toEqual({
@@ -93,29 +132,29 @@ describe('Responds to messages', () => {
         })
     })
 
-    test('comments listener', () => {
-        function XMLHttpRequest() {
+    test('comments listener', async () => {
+        async function fetch() {
             return {
-                send() {
-                    if (typeof this.onreadystatechange() === 'function') {
-                        this.onreadystatechange()
-                    }
-                },
-                open() {
-                    this.readyState = 4
-                    this.status = 200
-                    this.response = JSON.stringify(dictionary)
+                ok: true,
+                async json() {
+                    return JSON.parse(JSON.stringify(dictionary))
                 }
             }
         }
-        global.XMLHttpRequest = XMLHttpRequest
+        global.fetch = fetch
 
         browser.runtime.onMessage.listener({ name: 'comments' })
 
-        expect(window.settings.comments).toEqual(dictionary)
+        await new Promise(process.nextTick)
+
+        const settings = await browser.storage.local.get()
+
+        expect(settings.comments).toEqual(dictionary)
+
+        delete global.fetch
     })
 
-    test('idle listener', () => {
+    test('idle listener', async () => {
         expect.assertions(4)
         jest.useFakeTimers()
         let lastId
@@ -127,14 +166,20 @@ describe('Responds to messages', () => {
             }
         }
 
-        window.settings.isActive = false
+        await browser.storage.local.set({
+            isActive: false
+        })
+
         browser.runtime.onMessage.listener({ name: 'idle' })
         jest.runAllTimers()
 
         expect(lastId).toBeUndefined()
         expect(lastMessage).toBeUndefined()
 
-        window.settings.isActive = true
+        await browser.storage.local.set({
+            isActive: true
+        })
+
         browser.runtime.onMessage.listener({ name: 'idle' })
         jest.runAllTimers()
 
@@ -150,17 +195,20 @@ describe('Toolbar controls are working', () => {
     it('should toggle button icons on click', () => {
         expect.assertions(tabs.length * 2)
 
-        browser.browserAction.setIcon = (payload) => {
+        browser.action.setIcon = (payload) => {
             expect(payload.path).toBeDefined()
             expect(payload.tabId).toBeDefined()
         }
 
-        browser.browserAction.onClicked.listener()
+        browser.action.onClicked.listener()
     })
 
-    it('should toggle isActive status on click', () => {
+    it('should toggle isActive status on click', async () => {
         expect.assertions(tabs.length * 2)
-        window.settings.isActive = true
+
+        await browser.storage.local.set({
+            isActive: true
+        })
 
         browser.tabs.sendMessage = (tabId, message) => {
             expect(tabId).toBeDefined()
@@ -170,13 +218,15 @@ describe('Toolbar controls are working', () => {
             })
         }
 
-        browser.browserAction.onClicked.listener()
+        browser.action.onClicked.listener()
     })
 })
 
 describe('Responds to external messages', () => {
-    test('connect listener', () => {
-        window.settings.isActive = true
+    test('connect listener', async () => {
+        await browser.storage.local.set({
+            isActive: true
+        })
 
         browser.runtime.onMessageExternal.listener({ name: 'WHAT_IS_THE_MEANING_OF_LIFE' }, {}, (response) => {
             expect(response).toEqual({
@@ -184,14 +234,16 @@ describe('Responds to external messages', () => {
                 value: {
                     installed: true,
                     isActive: true,
-                    version: 2
+                    version: 3
                 }
             })
         })
     })
 
-    test('toggle listener', () => {
-        window.settings.isActive = true
+    test('toggle listener', async () => {
+        await browser.storage.local.set({
+            isActive: true
+        })
 
         browser.runtime.onMessageExternal.listener({ name: 'RISE' }, {}, (response) => {
             expect(response).toEqual({

@@ -1,5 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
+
 const createBrowser = () => {
-    window.browser = {
+    global.browser = {
         runtime: {
             sendMessage() {},
             onMessage: {

@@ -8,6 +8,10 @@ var browser = (function createBrowser() {
         return browser
     }
 
+    if (typeof global !== 'undefined' && typeof global.browser !== 'undefined') {
+        return global.browser;
+    }
+
     throw new Error('No browser found')
 }())
 /* eslint-enable no-var */
@@ -160,4 +164,8 @@ if (isFirefox) {
 
         return true
     }, false)
+}
+
+if (typeof global !== 'undefined') {
+    global.clippyController = clippyController
 }

@@ -8,6 +8,10 @@ var browser = (function createBrowser() {
         return browser
     }
 
+    if (typeof global !== 'undefined' && typeof global.browser !== 'undefined') {
+        return global.browser;
+    }
+
     throw new Error('No browser found')
 }())
 /* eslint-enable no-var */
@@ -17,10 +21,10 @@ const initSettings = async () => {
         settings: {
             isActive: true,
             comments: {},
-            ...(await browser.storage.local.get()).settings
+            ...(await browser.storage.local.get())
         }
     }
-    await browser.storage.local.set(initialState)
+    await browser.storage.local.set(initialState.settings)
     const state = {
         ...initialState
     }
