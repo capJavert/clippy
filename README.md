@@ -2,7 +2,6 @@
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/oaknkllfdceggjpbonhiegoaifjdkfjd)](https://chrome.google.com/webstore/detail/clippy/oaknkllfdceggjpbonhiegoaifjdkfjd)
 [![Mozilla Add-on](https://img.shields.io/amo/v/clippy-assistant)](https://addons.mozilla.org/en-US/firefox/addon/clippy-assistant/)
-[![Build Status](https://travis-ci.org/capJavert/clippy.svg?branch=master)](https://travis-ci.org/capJavert/clippy)
 [![Coverage Status](https://coveralls.io/repos/github/capJavert/clippy/badge.svg)](https://coveralls.io/github/capJavert/clippy)
 
 [🇭🇷 Started in Croatia](https://startedincroatia.com)

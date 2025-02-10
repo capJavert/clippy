@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - "master"
+    tags-ignore:
+      - gh-pages
+      - website
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build JavaScript
+        run: CI=true npm run build:js
+
+      - name: Lint code
+        run: CI=true npm run lint
+
+      - name: Run tests and upload coverage
+        run: CI=true npm run test:upload-coverage
