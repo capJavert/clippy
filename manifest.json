@@ -3,7 +3,7 @@
     "name": "Clippy",
     "short_name": "Clippy Assistant",
     "description": "Clippy MS Word Office assistant is now back to assist inside your browser!",
-    "version": "1.9.2",
+    "version": "1.10.0",
     "author": "Ante Barić (capJavert)",
     "icons": {
         "16": "assets/img/clippy-icon-16x16.png",
