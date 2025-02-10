@@ -1,6 +1,6 @@
 {
     "name": "clippy",
-    "version": "1.9.2",
+    "version": "1.10.0",
     "description": "Clippy MS Word Office asistant is now back to help inside your browser!",
     "main": "lib/index.js",
     "scripts": {
