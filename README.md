@@ -22,7 +22,7 @@ You can pack this code into your custom extension for any major browser. These b
 
 Consult these links for guids on how to develop, test and pack extensions:
 - Chrome: https://developer.chrome.com/extensions/getstarted
-- Firefox: https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Your_first_WebExtension
+- Firefox: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension
 - Opera: https://dev.opera.com/extensions/basics
 
 ### Setup the code
